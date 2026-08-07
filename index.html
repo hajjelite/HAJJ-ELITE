@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
+<title>الحج إيليت — HAJJ ELITE | برامج الحج الفاخرة ١٤٤٧ هـ</title>
+<meta name="description" content="برامج حج فاخرة من دار السفر تورز. من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه. حج مباشر بدون قرعة.">
+<!-- Meta Pixel — ضع رقمك هنا -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID');fbq('track','PageView');</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#0F6B4B;--gd:#083D2A;--gl:#E6F5EE;--au:#D4AF37;--ad:#B8960C;--al:#FBF5E0;--bg:#F8F6F1;--tx:#1A2238;--ts:#5A6480;--wh:#fff;--bd:#E5E0D8;--red:#EF4444;--admbg:#F1F5F9;--f:'Tajawal',Arial,sans-serif}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--tx);direction:rtl;min-height:100svh}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font-family:var(--f)}
+.hidden{display:none!important}
+.container{max-width:1140px;margin:0 auto;padding:0 20px}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 22px;border-radius:24px;border:none;font-weight:800;font-size:14px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn:hover{opacity:.88;transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff}
+.btn-gold{background:linear-gradient(135deg,var(--au),var(--ad));color:var(--tx)}
+.btn-outline{background:transparent;border:2px solid var(--g);color:var(--g)}
+.btn-outline:hover{background:var(--g);color:#fff}
+.btn-ghost{background:transparent;border:none;color:var(--ts)}
+.btn-danger{background:var(--red);color:#fff}
+.btn-sm{padding:6px 14px;font-size:12px;border-radius:16px}
+.btn-wa{background:#25D366;color:#fff}
+
+/* ── FORMS ── */
+.fi{width:100%;padding:12px 14px;border-radius:10px;border:2px solid var(--bd);font-size:14px;color:var(--tx);background:var(--wh);outline:none;transition:border-color .2s;direction:rtl;box-sizing:border-box}
+.fi:focus{border-color:var(--g)}
+.fi-ltr{direction:ltr;text-align:left}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.fg{margin-bottom:13px}
+.flbl{display:block;font-weight:700;font-size:12px;color:var(--ts);margin-bottom:5px}
+
+/* ── ANNOUNCEMENT BAR ── */
+#ann-bar{background:var(--gd);color:var(--au);font-size:13px;font-weight:700;padding:9px 40px;text-align:center;position:relative}
+.ann-x{position:absolute;left:14px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--au);font-size:20px;cursor:pointer;opacity:.7}
+
+/* ── MARQUEE ── */
+.mq{background:var(--g);padding:8px 0;overflow:hidden}
+.mq-track{display:flex;animation:mq 35s linear infinite;white-space:nowrap;width:max-content}
+.mq-track span{padding:0 40px;color:rgba(255,255,255,.82);font-size:13px;font-weight:600}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── NAV ── */
+#nav{position:sticky;top:0;z-index:990;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1.5px solid rgba(212,175,55,.3)}
+.nav-in{max-width:1140px;margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:64px;gap:10px}
+.nav-logo{display:flex;align-items:center;gap:10px;cursor:pointer;flex-shrink:0;user-select:none;-webkit-tap-highlight-color:transparent}
+.logo-ic{width:40px;height:40px;background:linear-gradient(135deg,var(--g),var(--gd));border-radius:11px;display:flex;align-items:center;justify-content:center;color:var(--au);font-weight:900;font-size:20px;transition:transform .15s}
+.logo-ic.tap{transform:scale(.88)}
+.logo-main{font-size:15px;font-weight:900;color:var(--g);letter-spacing:.5px}
+.logo-sub{font-size:9px;color:var(--au);font-weight:700}
+.nav-links{display:flex;align-items:center;gap:3px;flex-wrap:wrap}
+.nl{background:none;border:none;padding:7px 11px;border-radius:8px;font-size:12px;font-weight:500;color:var(--tx);cursor:pointer;transition:all .15s}
+.nl:hover{background:var(--g);color:#fff;font-weight:700}
+.nav-cta{background:linear-gradient(135deg,var(--au),var(--ad));color:var(--tx);border:none;padding:9px 18px;border-radius:22px;font-weight:900;font-size:12px;cursor:pointer}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(150deg,var(--g) 0%,var(--gd) 60%,#051F14 100%);padding:80px 20px 64px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;background:radial-gradient(circle,rgba(212,175,55,.14),transparent 70%);pointer-events:none}
+.hero-c{max-width:820px;margin:0 auto;text-align:center;position:relative}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.2);border:1px solid rgba(212,175,55,.4);border-radius:24px;padding:7px 20px;margin-bottom:24px;font-size:13px;color:var(--au);font-weight:700}
+.hero h1{font-size:clamp(26px,5vw,48px);color:#fff;line-height:1.25;margin-bottom:18px;font-weight:900}
+.hero h1 span{color:var(--au)}
+.hero-sub{color:rgba(255,255,255,.8);font-size:16px;line-height:1.85;margin:0 auto 36px;max-width:620px}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
+.btn-hero-ol{background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.35);padding:14px 32px;border-radius:28px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
+.btn-hero-ol:hover{background:rgba(255,255,255,.22)}
+.hero-stats{display:flex;justify-content:center;border-top:1px solid rgba(255,255,255,.1);padding-top:32px;flex-wrap:wrap}
+.hst{text-align:center;padding:0 24px;border-left:1px solid rgba(255,255,255,.15)}
+.hst:last-child{border-left:none}
+.hst .n{font-size:20px;font-weight:900;color:var(--au)}
+.hst .l{font-size:11px;color:rgba(255,255,255,.58);margin-top:3px}
+
+/* ── TRUST BAR ── */
+.trust{background:var(--wh);border-bottom:1px solid var(--bd)}
+.trust-in{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.ti{text-align:center;padding:22px 16px;border-left:1px solid var(--bd)}
+.ti:last-child{border-left:none}
+.ti-i{font-size:26px;margin-bottom:6px}
+.ti-t{font-weight:800;font-size:13px;color:var(--g);margin-bottom:3px}
+.ti-d{font-size:11px;color:var(--ts);line-height:1.6}
+
+/* ── SECTION HEADER ── */
+.sec{padding:68px 20px}
+.sec-wh{background:var(--wh)}
+.sec-bg{background:var(--bg)}
+.sec-hdr{text-align:center;margin-bottom:40px}
+.sec-lbl{color:var(--au);font-weight:700;font-size:12px;letter-spacing:1px;margin-bottom:8px}
+.sec-hdr h2{font-size:29px;font-weight:900;color:var(--tx)}
+.sec-hdr p{color:var(--ts);font-size:13px;margin-top:6px}
+
+/* ── FILTERS ── */
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:30px}
+.fbtn{padding:9px 20px;border-radius:22px;border:2px solid var(--bd);background:transparent;color:var(--tx);font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
+.fbtn.active,.fbtn:hover{background:var(--g);color:#fff;border-color:var(--g);font-weight:800}
+
+/* ── PACKAGE CARDS ── */
+.pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:22px}
+.pkg-card{background:var(--wh);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);border:1px solid var(--bd);cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative}
+.pkg-card:hover{transform:translateY(-4px);box-shadow:0 14px 38px rgba(0,0,0,.12)}
+.pkg-card.feat{border:2px solid var(--au);box-shadow:0 8px 40px rgba(212,175,55,.24)}
+.pbadge{position:absolute;top:14px;right:14px;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:900;z-index:1}
+.pb-gold{background:var(--au);color:var(--tx)}
+.pb-green{background:var(--g);color:#fff}
+.phead{padding:24px 20px 18px}
+.phead-dk{background:linear-gradient(135deg,var(--g),var(--gd))}
+.pcode{font-size:10px;font-weight:700;margin-bottom:4px}
+.pc-lgt{color:rgba(255,255,255,.6)}
+.pc-drk{color:var(--ts)}
+.pname{font-size:17px;font-weight:900;line-height:1.3}
+.pn-lgt{color:#fff}
+.pn-drk{color:var(--tx)}
+.psub{font-size:12px;margin-top:2px}
+.ps-lgt{color:rgba(255,255,255,.6)}
+.ps-drk{color:var(--ts)}
+.pprice{font-size:27px;font-weight:900;color:var(--au);margin-top:10px}
+.pprice span{font-size:12px;font-weight:400}
+.pdep{font-size:11px;margin-top:2px}
+.pd-lgt{color:rgba(255,255,255,.52)}
+.pd-drk{color:var(--ts)}
+.pbody{padding:18px 20px}
+.prow{display:flex;justify-content:space-between;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--bd);font-size:12px;gap:8px}
+.prow:last-of-type{border-bottom:none}
+.prl{color:var(--ts);flex-shrink:0}
+.prv{font-weight:700;color:var(--tx);text-align:left;font-size:11px}
+.pfeat-wrap{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0}
+.pfeat{background:var(--gl);color:var(--g);font-size:10px;padding:3px 8px;border-radius:7px;font-weight:700}
+.pfeat-more{background:var(--bg);color:var(--ts)}
+.pcta{width:100%;padding:12px;border-radius:10px;border:none;font-weight:900;font-size:14px;cursor:pointer;margin-top:14px;transition:opacity .2s}
+.pcta:hover{opacity:.88}
+.pcta-gold{background:linear-gradient(135deg,var(--au),var(--ad));color:var(--tx)}
+.pcta-green{background:var(--g);color:#fff}
+
+/* ── HOW GRID ── */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:20px}
+.how-card{background:var(--wh);border-radius:15px;padding:28px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.how-ic{font-size:34px;margin-bottom:10px}
+.how-t{font-weight:800;color:var(--g);margin-bottom:6px;font-size:15px}
+.how-d{font-size:12px;color:var(--ts);line-height:1.7}
+
+/* ── TESTIMONIALS ── */
+.test-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:20px}
+.tcard{background:var(--wh);border-radius:16px;padding:24px;box-shadow:0 4px 20px rgba(0,0,0,.06);position:relative}
+.tcard::before{content:'"';position:absolute;top:16px;left:18px;font-size:48px;color:var(--au);opacity:.12;font-family:Georgia;line-height:1}
+.tstars{color:var(--au);font-size:15px;letter-spacing:2px;margin-bottom:10px}
+.ttxt{font-size:13px;line-height:1.9;color:#444;margin-bottom:16px}
+.tauth{display:flex;align-items:center;gap:10px;padding-top:13px;border-top:1px solid var(--bd)}
+.tav{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--g),var(--gd));display:flex;align-items:center;justify-content:center;color:var(--au);font-weight:900;font-size:14px;flex-shrink:0}
+.tname{font-weight:800;font-size:13px;color:var(--tx)}
+.trole{font-size:11px;color:var(--ts)}
+
+/* ── FAQ ── */
+.faq-item{border:1px solid var(--bd);border-radius:12px;margin-bottom:8px;overflow:hidden}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;cursor:pointer;background:var(--wh);transition:background .2s}
+.faq-q:hover,.faq-q.open{background:var(--gl)}
+.faq-qt{font-weight:700;font-size:14px;flex:1}
+.faq-tog{color:var(--g);font-size:20px;font-weight:700;flex-shrink:0;margin-right:10px;width:20px;text-align:center}
+.faq-a{display:none;padding:4px 18px 15px;font-size:13px;color:var(--ts);line-height:1.85}
+
+/* ── LEAD SECTION ── */
+.lead-sec{background:linear-gradient(150deg,var(--g) 0%,var(--gd) 100%);padding:72px 20px;position:relative;overflow:hidden}
+.lead-sec::before{content:'';position:absolute;top:0;right:0;width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,.18),transparent 60%);pointer-events:none}
+.lead-in{max-width:560px;margin:0 auto;text-align:center;position:relative}
+.lead-in h2{color:#fff;font-size:26px;font-weight:900;margin-bottom:8px}
+.lead-in p{color:rgba(255,255,255,.72);font-size:14px;line-height:1.8;margin-bottom:26px}
+.lead-card{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border-radius:18px;padding:26px;border:1px solid rgba(255,255,255,.15)}
+.lead-card .fi{background:rgba(255,255,255,.92)}
+.lead-ok{text-align:center;padding:32px}
+.lok-ic{font-size:52px;margin-bottom:14px}
+.lok-t{color:#fff;font-size:20px;font-weight:900;margin-bottom:8px}
+.lok-s{color:rgba(255,255,255,.75);font-size:14px;line-height:1.8}
+
+/* ── FOOTER ── */
+footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
+.ft-grid{max-width:1140px;margin:0 auto 30px;display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:30px}
+.flogo{font-weight:900;font-size:20px;color:var(--au);margin-bottom:5px}
+.flogo-s{font-size:10px;color:var(--au);opacity:.75;margin-bottom:10px}
+.ftxt{font-size:12px;opacity:.55;line-height:1.9}
+.ftit{font-weight:800;color:var(--au);font-size:13px;margin-bottom:11px}
+.flink{font-size:12px;opacity:.6;margin-bottom:7px;cursor:pointer;display:block;transition:opacity .2s}
+.flink:hover{opacity:1}
+.ft-bot{max-width:1140px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:17px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.fcopy{font-size:11px;opacity:.4}
+
+/* ── WHATSAPP FAB ── */
+#wa-fab{position:fixed;bottom:22px;left:22px;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(37,211,102,.4);z-index:980;font-size:24px;transition:transform .2s}
+#wa-fab:hover{transform:scale(1.1)}
+
+/* ── OVERLAY / MODAL ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay.open{opacity:1;pointer-events:auto}
+.modal{background:var(--wh);border-radius:20px;width:100%;max-height:90dvh;overflow-y:auto}
+.modal-hdr{padding:20px 22px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
+.modal-hdr h3{font-size:16px;font-weight:900}
+.mclose{background:none;border:none;font-size:22px;cursor:pointer;color:var(--ts);padding:2px 8px}
+.modal-body{padding:22px}
+.modal-ftr{padding:14px 22px;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:10px}
+
+/* ── TOAST ── */
+#toast{position:fixed;top:76px;left:50%;transform:translateX(-50%);padding:11px 22px;border-radius:10px;font-size:14px;font-weight:700;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap;max-width:90vw;text-align:center}
+#toast.show{opacity:1}
+#toast.ok{background:var(--g);color:#fff}
+#toast.err{background:var(--red);color:#fff}
+#toast.info{background:#1D4ED8;color:#fff}
+
+/* ── LOGO TAP HINT ── */
+#tap-hint{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.75);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:700;z-index:9998;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+#tap-hint.show{opacity:1}
+
+/* ── ADMIN LOGIN OVERLAY ── */
+#adm-login{display:none;position:fixed;inset:0;background:linear-gradient(150deg,var(--gd),#051F14);z-index:2000;align-items:center;justify-content:center;padding:20px}
+.alog-card{background:var(--wh);border-radius:20px;padding:38px 34px;max-width:400px;width:100%;text-align:center}
+.alog-ic{width:62px;height:62px;background:linear-gradient(135deg,var(--g),var(--gd));border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;color:var(--au)}
+.alog-card h2{font-size:20px;margin-bottom:5px}
+.alog-card p{color:var(--ts);font-size:13px;margin-bottom:22px}
+.alog-err{background:#FEE2E2;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px;text-align:right}
+.conn-chip{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 14px;border-radius:20px;margin-bottom:16px}
+.cc-ok{background:#D1FAE5;color:#065F46}
+.cc-err{background:#FEE2E2;color:#991B1B}
+.cc-load{background:#F1F5F9;color:var(--ts)}
+.cc-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+/* ── ADMIN PANEL ── */
+#adm-panel{display:none;min-height:100svh;background:var(--admbg)}
+.adm-nav{background:var(--tx);padding:0 18px;display:flex;align-items:center;height:58px;gap:12px;position:sticky;top:0;z-index:99;overflow-x:auto}
+.adm-logo{color:var(--au);font-weight:900;font-size:15px;flex-shrink:0;white-space:nowrap}
+.adm-links{display:flex;gap:2px;flex:1;overflow-x:auto}
+.adl{background:none;border:none;color:rgba(255,255,255,.6);padding:7px 13px;border-radius:7px;font-size:12px;cursor:pointer;white-space:nowrap;transition:all .2s}
+.adl:hover,.adl.active{background:rgba(255,255,255,.12);color:#fff;font-weight:700}
+.adm-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.adm-usr{color:rgba(255,255,255,.6);font-size:12px;white-space:nowrap}
+.adm-back{background:rgba(255,255,255,.08);border:none;color:rgba(255,255,255,.7);padding:7px 12px;border-radius:7px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px}
+.adm-logout{background:rgba(239,68,68,.15);border:none;color:#FCA5A5;padding:7px 12px;border-radius:7px;font-size:12px;cursor:pointer}
+.adm-body{padding:22px 18px;max-width:1200px;margin:0 auto}
+.adt{display:none}
+.adt.active{display:block}
+.adt-hdr{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.adt-hdr h2{font-size:18px;font-weight:900}
+/* Stats */
+.stt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:13px;margin-bottom:24px}
+.stt{background:var(--wh);border-radius:13px;padding:18px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.stt-ic{font-size:22px;margin-bottom:8px}
+.stt-v{font-size:28px;font-weight:900;color:var(--g)}
+.stt-l{font-size:12px;color:var(--ts);margin-top:3px}
+/* Table */
+.tbl-wrap{background:var(--wh);border-radius:13px;box-shadow:0 2px 10px rgba(0,0,0,.05);overflow:hidden}
+.tbl-scroll{overflow-x:auto}
+.adm-tbl{width:100%;border-collapse:collapse}
+.adm-tbl th{background:#F8FAFC;padding:11px 14px;font-size:12px;font-weight:700;color:var(--ts);text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
+.adm-tbl td{padding:11px 14px;font-size:13px;border-bottom:1px solid #F1F5F9;vertical-align:middle}
+.adm-tbl tr:last-child td{border-bottom:none}
+.adm-tbl tr:hover td{background:#FAFCFF}
+.sbadge{display:inline-block;padding:3px 10px;border-radius:9px;font-size:11px;font-weight:700}
+.s-new{background:#DBEAFE;color:#1D4ED8}
+.s-contacted{background:#FEF3C7;color:#92400E}
+.s-booked{background:#D1FAE5;color:#065F46}
+.s-cancelled{background:#FEE2E2;color:#991B1B}
+/* Settings */
+.set-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.set-card{background:var(--wh);border-radius:13px;padding:20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+.set-card h3{font-size:14px;font-weight:800;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+/* New lead notif */
+#ln{position:fixed;bottom:20px;left:20px;background:var(--wh);border-radius:14px;box-shadow:0 8px 32px rgba(0,0,0,.18);padding:14px 16px;max-width:270px;z-index:5000;border-right:4px solid var(--g);display:none;animation:sIn .3s}
+#ln.show{display:flex;align-items:flex-start;gap:10px}
+@keyframes sIn{from{transform:translateX(-110%);opacity:0}to{transform:translateX(0);opacity:1}}
+.ln-ic{font-size:22px}
+.ln-t{font-weight:800;font-size:13px;color:var(--tx)}
+.ln-s{font-size:11px;color:var(--ts);margin-top:2px}
+.ln-x{position:absolute;top:6px;left:8px;background:none;border:none;color:var(--ts);cursor:pointer;font-size:15px}
+
+/* ── AUTH TABS ── */
+.auth-tabs{display:flex;border-bottom:1px solid var(--bd)}
+.auth-tab{flex:1;padding:11px;border:none;border-bottom:2px solid transparent;background:transparent;font-weight:600;font-size:14px;color:var(--ts);cursor:pointer;transition:all .2s;font-family:var(--f)}
+.auth-tab.active{border-bottom-color:var(--g);color:var(--g);font-weight:800}
+.auth-pane{padding:20px 22px}
+.auth-err{background:#FEE2E2;color:#991B1B;padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:12px}
+/* My Requests */
+.req-card{background:var(--bg);border-radius:12px;padding:14px 16px;border:1px solid var(--bd);margin-bottom:10px}
+.req-pkg{font-weight:800;font-size:14px;margin-bottom:6px}
+.req-meta{font-size:12px;color:var(--ts);line-height:1.8}
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.trust-in{grid-template-columns:repeat(2,1fr)}.ti:nth-child(2){border-left:none}}
+@media(max-width:768px){.hero{padding:56px 16px 44px}.hero h1{font-size:26px}.hst{padding:0 14px}.pkg-grid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.test-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr 1fr}.nl{display:none}.adm-body{padding:14px 12px}.stt-grid{grid-template-columns:repeat(2,1fr)}.tbl-scroll{overflow-x:auto}.adm-tbl{min-width:600px}}
+@media(max-width:480px){.hero-stats,.hero-badge{display:none}.hero-btns{flex-direction:column;align-items:center}.ft-grid{grid-template-columns:1fr}.trust-in{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════
+     STOREFRONT
+══════════════════════════════════════ -->
+<div id="storefront">
+
+<!-- Announcement -->
+<div id="ann-bar">
+  <span id="ann-txt">🕌 برامج الحج ١٤٤٧ هـ — حج مباشر بدون قرعة — دار السفر تورز</span>
+  <button class="ann-x" onclick="this.parentElement.style.display='none'">×</button>
+</div>
+
+<!-- Marquee -->
+<div class="mq"><div class="mq-track" id="mq-track">
+  <span id="mq1">حج مباشر بدون قرعة • سفر من صالة كبار الزوار • قطار الحرمين السريع • إشراف ديني متميز • مخيمات فاخرة بعرفة •</span>
+  <span aria-hidden="true">حج مباشر بدون قرعة • سفر من صالة كبار الزوار • قطار الحرمين السريع • إشراف ديني متميز • مخيمات فاخرة بعرفة •</span>
+</div></div>
+
+<!-- Nav -->
+<nav id="nav">
+  <div class="nav-in">
+    <div class="nav-logo" id="nav-logo">
+      <div class="logo-ic" id="logo-ic">ح</div>
+      <div>
+        <div class="logo-main">HAJJ ELITE</div>
+        <div class="logo-sub">الحج إيليت — دليلك للحج الفاخر</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nl" onclick="sid('pkg-sec')">البرامج</button>
+      <button class="nl" onclick="sid('test-sec')">آراء الحجاج</button>
+      <button class="nl" onclick="sid('faq-sec')">الأسئلة</button>
+      <!-- User Auth Nav -->
+      <button id="nav-si-btn" class="nl" onclick="openAuthModal('signin')" style="color:var(--g);font-weight:700">دخول / تسجيل</button>
+      <div id="nav-user-box" class="hidden" style="display:none;align-items:center;gap:4px">
+        <span id="nav-uname" style="font-size:12px;color:var(--g);font-weight:800;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></span>
+        <button class="nl" style="font-size:11px;padding:5px 8px" onclick="openMyRequests()">📋 طلباتي</button>
+        <button class="nl" style="font-size:11px;padding:5px 8px;color:var(--red)" onclick="userLogout()">خروج</button>
+      </div>
+      <button class="nav-cta" onclick="sid('lead-sec')">← استشارة مجانية</button>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-c">
+    <div class="hero-badge">🕌 برامج الحج ١٤٤٧ هـ / ٢٠٢٦ م — دار السفر تورز</div>
+    <h1>قارن أفضل برامج الحج الفاخرة<br><span>لموسم ١٤٤٧ هـ في مصر</span></h1>
+    <p class="hero-sub">برامج متنوعة من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه — حج مباشر بدون قرعة<br>سفر من صالة كبار الزوار · قطار الحرمين السريع · إشراف ديني متميز</p>
+    <div class="hero-btns">
+      <button class="btn btn-gold" style="padding:15px 34px;font-size:15px;border-radius:30px" onclick="sid('lead-sec')">احجز استشارة مجانية ←</button>
+      <button class="btn-hero-ol" onclick="sid('pkg-sec')">عرض جميع البرامج</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hst"><div class="n">١٠+</div><div class="l">برنامج متاح</div></div>
+      <div class="hst"><div class="n">٢٤٥ - ٦٤٥ ألف</div><div class="l">نطاق الأسعار (جنيه)</div></div>
+      <div class="hst"><div class="n">بدون قرعة</div><div class="l">حج مباشر</div></div>
+      <div class="hst"><div class="n">٢٤/٧</div><div class="l">دعم متواصل</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust Bar -->
+<div class="trust"><div class="trust-in">
+  <div class="ti"><div class="ti-i">✅</div><div class="ti-t">حج مباشر بدون قرعة</div><div class="ti-d">وفق ضوابط وزارة السياحة المصرية</div></div>
+  <div class="ti"><div class="ti-i">🚆</div><div class="ti-t">قطار الحرمين السريع</div><div class="ti-d">انتقال مريح من المدينة إلى مكة</div></div>
+  <div class="ti"><div class="ti-i">🎓</div><div class="ti-t">إشراف ديني متميز</div><div class="ti-d">دعاة متخصصون لشرح المناسك</div></div>
+  <div class="ti"><div class="ti-i">✈️</div><div class="ti-t">صالة كبار الزوار</div><div class="ti-d">تجربة سفر مميزة من أول لحظة</div></div>
+</div></div>
+
+<!-- Packages -->
+<section class="sec sec-wh" id="pkg-sec">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="sec-lbl">دار السفر تورز — موسم ١٤٤٧ هـ</div>
+      <h2>برامج الحج الفاخرة</h2>
+      <p>الأسعار للفرد رباعي · لا تشمل تذاكر الطيران · مقدم الحجز من ٥,٠٠٠ جنيه</p>
+    </div>
+    <div class="filters">
+      <button class="fbtn active" data-f="all"      onclick="filterPkgs('all',this)">جميع البرامج</button>
+      <button class="fbtn"        data-f="kidana"   onclick="filterPkgs('kidana',this)">أبراج كدانة</button>
+      <button class="fbtn"        data-f="vip"      onclick="filterPkgs('vip',this)">فاخر VIP</button>
+      <button class="fbtn"        data-f="classic"  onclick="filterPkgs('classic',this)">كلاسيك</button>
+      <button class="fbtn"        data-f="economy"  onclick="filterPkgs('economy',this)">تحسين</button>
+      <button class="fbtn"        data-f="featured" onclick="filterPkgs('featured',this)">⭐ المميزة</button>
+    </div>
+    <div id="pkg-loading" style="text-align:center;padding:48px;color:var(--ts)"><div style="font-size:32px;margin-bottom:10px">⏳</div>جاري تحميل البرامج...</div>
+    <div class="pkg-grid" id="pkg-grid"></div>
+    <div id="pkg-empty" class="hidden" style="text-align:center;padding:40px;color:var(--ts)"><div style="font-size:40px;margin-bottom:12px">📭</div>لا توجد برامج في هذا التصنيف</div>
+  </div>
+</section>
+
+<!-- How -->
+<section class="sec sec-bg">
+  <div class="container">
+    <div class="sec-hdr"><h2>ما يميز برامجنا</h2></div>
+    <div class="how-grid">
+      <div class="how-card"><div class="how-ic">🚆</div><div class="how-t">قطار الحرمين السريع</div><div class="how-d">انتقال مريح وسريع من المدينة إلى مكة براحة تامة</div></div>
+      <div class="how-card"><div class="how-ic">🏕️</div><div class="how-t">مخيمات فاخرة مكيفة</div><div class="how-d">إقامة بعرفة ومنى مع جميع الوجبات وخدمة عالية</div></div>
+      <div class="how-card"><div class="how-ic">📖</div><div class="how-t">إشراف ديني متميز</div><div class="how-d">دعاة متخصصون يشرحون المناسك ويجيبون عن استفساراتكم</div></div>
+      <div class="how-card"><div class="how-ic">🎁</div><div class="how-t">هدايا لكل حاج</div><div class="how-d">تقدم الشركة هدايا قيّمة لجميع الحجاج في رحلتهم</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="sec" id="test-sec" style="background:linear-gradient(135deg,rgba(15,107,75,.06),rgba(212,175,55,.06))">
+  <div class="container">
+    <div class="sec-hdr"><div class="sec-lbl">آراء حجاجنا الكرام</div><h2>قالوا عن تجربتهم معنا</h2></div>
+    <div class="test-grid" id="test-grid"></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-wh" id="faq-sec">
+  <div class="container" style="max-width:800px">
+    <div class="sec-hdr"><h2>الأسئلة الشائعة</h2></div>
+    <div id="faq-wrap"></div>
+  </div>
+</section>
+
+<!-- Lead Form -->
+<section class="lead-sec" id="lead-sec">
+  <div class="lead-in">
+    <h2>احصل على استشارتك المجانية</h2>
+    <p>أخبرنا عن احتياجاتك وسيتواصل معك مستشار متخصص خلال ٢٤ ساعة</p>
+    <div id="lead-wrap">
+      <div class="lead-card">
+        <div class="frow" style="margin-bottom:12px">
+          <input class="fi" id="l-name" type="text" placeholder="الاسم الكامل *">
+          <input class="fi" id="l-phone" type="tel" placeholder="رقم الهاتف *">
+        </div>
+        <select class="fi" id="l-gov" style="margin-bottom:12px">
+          <option value="">المحافظة</option>
+          <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>الشرقية</option><option>الدقهلية</option><option>البحيرة</option><option>المنوفية</option><option>القليوبية</option><option>الغربية</option><option>أسيوط</option><option>الفيوم</option><option>بني سويف</option><option>المنيا</option><option>سوهاج</option><option>قنا</option><option>الأقصر</option><option>أسوان</option><option>السويس</option><option>بورسعيد</option><option>دمياط</option><option>كفر الشيخ</option><option>مطروح</option>
+        </select>
+        <select class="fi" id="l-budget" style="margin-bottom:12px">
+          <option value="">الميزانية التقريبية</option>
+          <option>أقل من ٢٥٠,٠٠٠ جنيه</option><option>٢٥٠,٠٠٠ - ٥٠٠,٠٠٠ جنيه</option><option>٥٠٠,٠٠٠ - ٦٠٠,٠٠٠ جنيه</option><option>أكثر من ٦٠٠,٠٠٠ جنيه</option>
+        </select>
+        <select class="fi" id="l-pil" style="margin-bottom:16px">
+          <option value="">عدد الحجاج</option>
+          <option>١ شخص</option><option>٢ شخصان</option><option>٣ - ٤ أشخاص</option><option>٥ فأكثر</option>
+        </select>
+        <button class="btn btn-gold" style="width:100%;padding:14px;font-size:15px;border-radius:12px" onclick="submitLead()">أرسل طلب الاستشارة المجانية ←</button>
+        <p style="text-align:center;margin-top:10px;font-size:11px;color:rgba(255,255,255,.45)">🔒 بياناتك محمية ولن تُشارك مع أطراف خارجية</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="ft-grid">
+    <div><div class="flogo">HAJJ ELITE</div><div class="flogo-s">الحج إيليت — دليلك الموثوق لحج الرفاهية</div><div class="ftxt">منصة متخصصة في برامج الحج الفاخرة من دار السفر تورز لموسم ١٤٤٧ هـ / ٢٠٢٦ م.</div></div>
+    <div><div class="ftit">البرامج</div><a class="flink" onclick="filterPkgs('kidana');sid('pkg-sec')">أبراج كدانة الوادي</a><a class="flink" onclick="filterPkgs('vip');sid('pkg-sec')">فاخر VIP</a><a class="flink" onclick="filterPkgs('classic');sid('pkg-sec')">كلاسيك ١٤ يوم</a><a class="flink" onclick="filterPkgs('economy');sid('pkg-sec')">تحسين</a></div>
+    <div><div class="ftit">تواصل معنا</div><div class="ftxt" id="f-contact">📧 info@hajjelite.com<br>💬 واتساب: قريباً<br>📍 القاهرة، مصر</div></div>
+    <div><div class="ftit">الضمانات</div><div class="ftxt">✅ وفق ضوابط وزارة السياحة المصرية<br>✅ حج مباشر بدون قرعة<br>✅ لا يشترط محرم فوق ٢٥ سنة<br>✅ الطيران غير مشمول بالسعر</div></div>
+  </div>
+  <div class="ft-bot"><div class="fcopy">© ٢٠٢٦ HAJJ ELITE. جميع الحقوق محفوظة.</div><div class="fcopy">سياسة الخصوصية · الشروط والأحكام</div></div>
+</footer>
+</div><!-- /storefront -->
+
+<!-- WhatsApp FAB -->
+<a id="wa-fab" href="https://wa.me/201000000000" target="_blank" rel="noopener">💬</a>
+
+<!-- Logo tap hint -->
+<div id="tap-hint">🔐</div>
+
+<!-- ══════════════════════════════════════
+     PACKAGE MODAL
+══════════════════════════════════════ -->
+<div class="overlay" id="pkg-modal" onclick="closePkgModal(event)">
+  <div class="modal" style="max-width:580px" onclick="event.stopPropagation()">
+    <div style="background:linear-gradient(135deg,var(--g),var(--gd));padding:26px 24px 20px;border-radius:20px 20px 0 0;position:relative">
+      <button class="mclose" onclick="closePkgModal()" style="position:absolute;top:12px;left:12px;color:#fff;background:rgba(255,255,255,.15);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center">×</button>
+      <div style="font-size:10px;font-weight:700;margin-bottom:4px;color:rgba(255,255,255,.6)" id="pm-code"></div>
+      <div style="font-size:19px;font-weight:900;color:#fff;line-height:1.3" id="pm-name"></div>
+      <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:3px" id="pm-sub"></div>
+      <div style="font-size:28px;font-weight:900;color:var(--au);margin-top:10px" id="pm-price"></div>
+      <div style="font-size:11px;color:rgba(255,255,255,.52);margin-top:2px" id="pm-dep"></div>
+    </div>
+    <div class="modal-body">
+      <div id="pm-details"></div>
+      <div id="pm-feats"></div>
+      <div style="background:var(--gl);border-radius:14px;padding:20px;margin-top:16px">
+        <div style="font-weight:800;font-size:15px;color:var(--g);margin-bottom:4px">احجز استشارة مجانية</div>
+        <div style="font-size:12px;color:var(--ts);margin-bottom:14px">سيتواصل معك مستشارنا خلال ٢٤ ساعة</div>
+        <div class="frow" style="margin-bottom:10px">
+          <input class="fi" id="pm-n" type="text" placeholder="الاسم الكامل *">
+          <input class="fi" id="pm-p" type="tel" placeholder="رقم الهاتف *">
+        </div>
+        <select class="fi" id="pm-pil" style="margin-bottom:10px"><option value="">عدد الحجاج</option><option>١ شخص</option><option>٢ شخصان</option><option>٣ - ٤ أشخاص</option><option>٥ فأكثر</option></select>
+        <textarea class="fi" id="pm-msg" rows="2" placeholder="ملاحظات (اختياري)" style="resize:none;margin-bottom:12px"></textarea>
+        <button class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;border-radius:11px" id="pm-submit" onclick="submitModalLead()">احجز هذا البرنامج ←</button>
+        <div style="text-align:center;margin-top:10px"><a id="pm-wa" href="#" target="_blank" style="font-size:12px;color:var(--g);font-weight:700">💬 أو تواصل عبر واتساب</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     AUTH MODAL (Sign In / Sign Up)
+══════════════════════════════════════ -->
+<div class="overlay" id="auth-modal" onclick="closeAuthModal(event)">
+  <div class="modal" style="max-width:420px" onclick="event.stopPropagation()">
+
+    <!-- Tabs Header -->
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="atab-si" onclick="switchAuthTab('signin')">تسجيل دخول</button>
+      <button class="auth-tab" id="atab-su" onclick="switchAuthTab('signup')">إنشاء حساب</button>
+    </div>
+
+    <!-- Sign In -->
+    <div id="apane-si" class="auth-pane">
+      <div id="si-err" class="auth-err hidden"></div>
+      <div class="fg"><label class="flbl">البريد الإلكتروني</label><input class="fi fi-ltr" id="si-email" type="email" placeholder="your@email.com"></div>
+      <div class="fg"><label class="flbl">كلمة المرور</label><input class="fi fi-ltr" id="si-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doSignIn()"></div>
+      <button class="btn btn-primary" style="width:100%;padding:13px;border-radius:12px;font-size:15px" id="si-btn" onclick="doSignIn()">تسجيل الدخول</button>
+      <p style="text-align:center;font-size:12px;color:var(--ts);margin-top:12px">ليس لديك حساب؟ <a onclick="switchAuthTab('signup')" style="color:var(--g);font-weight:700;cursor:pointer">أنشئ حساباً</a></p>
+    </div>
+
+    <!-- Sign Up -->
+    <div id="apane-su" class="auth-pane hidden">
+      <div id="su-err" class="auth-err hidden"></div>
+      <div class="fg"><label class="flbl">الاسم الكامل *</label><input class="fi" id="su-name" type="text" placeholder="اسمك الكامل"></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">البريد الإلكتروني *</label><input class="fi fi-ltr" id="su-email" type="email" placeholder="your@email.com"></div>
+        <div class="fg"><label class="flbl">رقم الهاتف</label><input class="fi fi-ltr" id="su-phone" type="tel" placeholder="01xxxxxxxxx"></div>
+      </div>
+      <div class="fg"><label class="flbl">كلمة المرور * (٨ أحرف على الأقل)</label><input class="fi fi-ltr" id="su-pass" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doSignUp()"></div>
+      <button class="btn btn-primary" style="width:100%;padding:13px;border-radius:12px;font-size:15px" id="su-btn" onclick="doSignUp()">إنشاء الحساب</button>
+      <p style="text-align:center;font-size:12px;color:var(--ts);margin-top:12px">لديك حساب؟ <a onclick="switchAuthTab('signin')" style="color:var(--g);font-weight:700;cursor:pointer">سجّل دخولك</a></p>
+    </div>
+
+    <!-- Success -->
+    <div id="apane-ok" class="auth-pane hidden" style="text-align:center;padding:32px 22px">
+      <div style="font-size:52px;margin-bottom:14px" id="aok-ic">✅</div>
+      <div style="font-size:18px;font-weight:900;color:var(--g);margin-bottom:8px" id="aok-title">تم بنجاح!</div>
+      <p style="font-size:13px;color:var(--ts);margin-bottom:20px" id="aok-sub"></p>
+      <button class="btn btn-outline" onclick="closeAuthModal()">إغلاق</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MY REQUESTS MODAL
+══════════════════════════════════════ -->
+<div class="overlay" id="myreq-modal" onclick="closeMyRequests(event)">
+  <div class="modal" style="max-width:560px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3>📋 طلباتي</h3><button class="mclose" onclick="closeMyRequests()">×</button></div>
+    <div class="modal-body" style="max-height:65dvh;overflow-y:auto">
+      <div id="myreq-list"><div style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ADMIN LOGIN (5-tap secret)
+══════════════════════════════════════ -->
+<div id="adm-login">
+  <div class="alog-card">
+    <div class="alog-ic">⚙️</div>
+    <h2>لوحة التحكم</h2>
+    <p>الحج إيليت — Admin</p>
+    <div class="conn-chip cc-load" id="cc"><div class="cc-dot"></div><span id="cc-txt">جاري الاتصال...</span></div>
+    <div id="alog-err" class="alog-err hidden"></div>
+    <div class="fg"><input class="fi fi-ltr" id="a-email" type="email" placeholder="admin@email.com"></div>
+    <div class="fg"><input class="fi fi-ltr" id="a-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()"></div>
+    <button class="btn btn-primary" style="width:100%;padding:13px;border-radius:12px;font-size:15px" id="login-btn" onclick="doLogin()">دخول</button>
+    <button class="btn btn-ghost" style="margin-top:12px;font-size:12px;width:100%" onclick="hideAdminLogin()">← العودة للموقع</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     ADMIN PANEL
+══════════════════════════════════════ -->
+<div id="adm-panel">
+  <div class="adm-nav">
+    <div class="adm-logo">⚙ HAJJ ELITE</div>
+    <div class="adm-links">
+      <button class="adl active" onclick="aTab('dashboard',this)">📊 الرئيسية</button>
+      <button class="adl" onclick="aTab('leads',this)">📋 الطلبات</button>
+      <button class="adl" onclick="aTab('packages',this)">📦 البرامج</button>
+      <button class="adl" onclick="aTab('testimonials',this)">⭐ الآراء</button>
+      <button class="adl" onclick="aTab('settings',this)">🔧 الإعدادات</button>
+    </div>
+    <div class="adm-right">
+      <span class="adm-usr" id="adm-usr"></span>
+      <button class="adm-back" onclick="backToSite()">🌐 الموقع</button>
+      <button class="adm-logout" onclick="doLogout()">خروج</button>
+    </div>
+  </div>
+
+  <div class="adm-body">
+
+    <!-- Dashboard -->
+    <div class="adt active" id="t-dashboard">
+      <div class="adt-hdr"><h2>📊 لوحة المعلومات</h2><button class="btn btn-sm btn-outline" onclick="loadDashboard()">🔄 تحديث</button></div>
+      <div class="stt-grid">
+        <div class="stt"><div class="stt-ic">📋</div><div class="stt-v" id="st-total">-</div><div class="stt-l">إجمالي الطلبات</div></div>
+        <div class="stt"><div class="stt-ic">🆕</div><div class="stt-v" id="st-new">-</div><div class="stt-l">طلبات جديدة</div></div>
+        <div class="stt"><div class="stt-ic">✅</div><div class="stt-v" id="st-booked">-</div><div class="stt-l">محجوزون</div></div>
+        <div class="stt"><div class="stt-ic">📦</div><div class="stt-v" id="st-pkgs">-</div><div class="stt-l">برامج نشطة</div></div>
+      </div>
+      <div class="adt-hdr"><h2>آخر الطلبات</h2></div>
+      <div class="tbl-wrap tbl-scroll"><table class="adm-tbl"><thead><tr><th>الاسم</th><th>الهاتف</th><th>الميزانية</th><th>البرنامج</th><th>الحالة</th><th>التاريخ</th></tr></thead><tbody id="dash-tb"><tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- Leads -->
+    <div class="adt" id="t-leads">
+      <div class="adt-hdr">
+        <h2>📋 جميع الطلبات</h2>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <select class="fi btn-sm" id="leads-f" onchange="loadLeads()" style="width:auto;padding:7px 12px"><option value="">كل الحالات</option><option value="new">جديد</option><option value="contacted">تم التواصل</option><option value="booked">محجوز</option><option value="cancelled">ملغي</option></select>
+          <button class="btn btn-sm btn-outline" onclick="loadLeads()">🔄</button>
+        </div>
+      </div>
+      <div class="tbl-wrap tbl-scroll"><table class="adm-tbl" style="min-width:820px"><thead><tr><th>الاسم</th><th>الهاتف</th><th>المحافظة</th><th>الميزانية</th><th>الحجاج</th><th>البرنامج</th><th>الحالة</th><th>التاريخ</th><th>تواصل</th></tr></thead><tbody id="leads-tb"><tr><td colspan="9" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- Packages -->
+    <div class="adt" id="t-packages">
+      <div class="adt-hdr"><h2>📦 إدارة البرامج</h2><button class="btn btn-sm btn-primary" onclick="openPkgForm()">+ إضافة برنامج</button></div>
+      <div class="tbl-wrap tbl-scroll"><table class="adm-tbl" style="min-width:700px"><thead><tr><th>الكود</th><th>الاسم</th><th>التصنيف</th><th>السعر</th><th>الظهور</th><th>مميز</th><th>إجراءات</th></tr></thead><tbody id="pkgs-tb"><tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="adt" id="t-testimonials">
+      <div class="adt-hdr"><h2>⭐ إدارة الآراء</h2><button class="btn btn-sm btn-primary" onclick="openTestForm()">+ إضافة رأي</button></div>
+      <div class="tbl-wrap"><table class="adm-tbl"><thead><tr><th>الاسم</th><th>الوصف</th><th>التقييم</th><th>المحتوى</th><th>الظهور</th><th>إجراءات</th></tr></thead><tbody id="tests-tb"><tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- Settings -->
+    <div class="adt" id="t-settings">
+      <div class="adt-hdr"><h2>🔧 إعدادات الموقع</h2></div>
+      <div class="set-grid">
+        <div class="set-card">
+          <h3>⚙️ الإعدادات العامة</h3>
+          <div class="fg"><label class="flbl">شريط الإعلان</label><input class="fi" id="s-ann"></div>
+          <div class="fg"><label class="flbl">نص الماركي</label><input class="fi" id="s-mq"></div>
+          <div class="fg"><label class="flbl">رقم الواتساب</label><input class="fi fi-ltr" id="s-wa"></div>
+          <div class="fg"><label class="flbl">البريد الإلكتروني</label><input class="fi fi-ltr" id="s-em"></div>
+          <button class="btn btn-primary" style="width:100%;padding:12px" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+        </div>
+        <div class="set-card">
+          <h3>🔑 تغيير كلمة المرور</h3>
+          <div class="fg"><label class="flbl">كلمة المرور الجديدة</label><input class="fi fi-ltr" id="s-np" type="password" placeholder="Min 8 characters"></div>
+          <div class="fg"><label class="flbl">تأكيد كلمة المرور</label><input class="fi fi-ltr" id="s-cp" type="password"></div>
+          <button class="btn btn-outline" style="width:100%;padding:12px" onclick="changePass()">🔑 تغيير كلمة المرور</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Package Form Modal -->
+<div class="overlay" id="pkg-form-ov" onclick="closePkgForm(event)">
+  <div class="modal" style="max-width:620px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3 id="pf-title">إضافة برنامج</h3><button class="mclose" onclick="closePkgForm()">×</button></div>
+    <div class="modal-body" style="max-height:65dvh;overflow-y:auto">
+      <input type="hidden" id="pf-id">
+      <div class="frow">
+        <div class="fg"><label class="flbl">الكود *</label><input class="fi" id="pf-code" placeholder="DS-1"></div>
+        <div class="fg"><label class="flbl">التصنيف *</label><select class="fi" id="pf-cat"><option value="kidana">أبراج كدانة</option><option value="vip">فاخر VIP</option><option value="classic">كلاسيك</option><option value="economy">تحسين</option></select></div>
+      </div>
+      <div class="fg"><label class="flbl">اسم البرنامج *</label><input class="fi" id="pf-name"></div>
+      <div class="fg"><label class="flbl">وصف مختصر</label><input class="fi" id="pf-desc"></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">السعر (جنيه) *</label><input class="fi" id="pf-price" type="number"></div>
+        <div class="fg"><label class="flbl">مقدم الحجز *</label><input class="fi" id="pf-dep" type="number" value="10000"></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">تفاصيل المدة</label><input class="fi" id="pf-dur" placeholder="١١ يوم المدينة أولاً"></div>
+        <div class="fg"><label class="flbl">الترتيب</label><input class="fi" id="pf-sort" type="number" value="0"></div>
+      </div>
+      <div class="fg"><label class="flbl">فندق مكة المكرمة</label><input class="fi" id="pf-mak"></div>
+      <div class="fg"><label class="flbl">فندق المدينة المنورة</label><input class="fi" id="pf-mad"></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">الوجبات</label><input class="fi" id="pf-meals" value="إفطار وعشاء بوفيه مفتوح"></div>
+        <div class="fg"><label class="flbl">التنقلات</label><input class="fi" id="pf-trans" value="قطار الحرمين السريع"></div>
+      </div>
+      <div class="fg"><label class="flbl">المميزات (سطر لكل ميزة)</label><textarea class="fi" id="pf-feats" rows="4" placeholder="مخيمات أبراج كدانة الوادي&#10;إقامة VIP بمنى&#10;سفر من صالة كبار الزوار"></textarea></div>
+      <div style="display:flex;gap:20px;margin-top:4px">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px"><input type="checkbox" id="pf-vis" checked> ظاهر</label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px"><input type="checkbox" id="pf-feat"> مميز ⭐</label>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closePkgForm()">إلغاء</button>
+      <button class="btn btn-primary" id="pf-save" onclick="savePkg()">💾 حفظ البرنامج</button>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonial Form Modal -->
+<div class="overlay" id="test-form-ov" onclick="closeTestForm(event)">
+  <div class="modal" style="max-width:460px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3 id="tf-title">إضافة رأي</h3><button class="mclose" onclick="closeTestForm()">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="tf-id">
+      <div class="frow">
+        <div class="fg"><label class="flbl">الاسم *</label><input class="fi" id="tf-name"></div>
+        <div class="fg"><label class="flbl">الوصف الوظيفي</label><input class="fi" id="tf-role" placeholder="طبيب، القاهرة"></div>
+      </div>
+      <div class="fg"><label class="flbl">الرأي *</label><textarea class="fi" id="tf-content" rows="4"></textarea></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">التقييم (١-٥)</label><input class="fi" id="tf-rating" type="number" min="1" max="5" value="5"></div>
+        <div class="fg"><label class="flbl">الترتيب</label><input class="fi" id="tf-sort" type="number" value="0"></div>
+      </div>
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;margin-top:4px"><input type="checkbox" id="tf-vis" checked> ظاهر في الموقع</label>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeTestForm()">إلغاء</button>
+      <button class="btn btn-primary" onclick="saveTest()">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast"></div>
+<!-- New lead notification -->
+<div id="ln"><div class="ln-ic">🔔</div><div><div class="ln-t">طلب جديد وصل!</div><div class="ln-s" id="ln-s">عميل جديد</div></div><button class="ln-x" onclick="document.getElementById('ln').classList.remove('show')">×</button></div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+// ── CONFIG ──────────────────────────────
+const SB_URL = 'https://zxebzlebirzqrhmhrxbg.supabase.co';
+const SB_KEY = 'sb_publishable_wo3Pemhkno7PNiwyZTWQGw_RZ4DL3Z6';
+
+// ── META PIXEL ───────────────────────────
+const track = (ev,d={}) => { try{ if(typeof fbq==='function') fbq('track',ev,d); }catch(_){} };
+
+// ── SUPABASE ─────────────────────────────
+let sb;
+try { sb = supabase.createClient(SB_URL, SB_KEY); } catch(e) { console.error('Supabase init:',e); }
+
+// ── STATE ────────────────────────────────
+const S = { pkgs:[], leads:[], tests:[], settings:null, session:null, profile:null, selPkg:null, rt:null };
+
+// ── UTILS ────────────────────────────────
+const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const fmt  = n => Number(n).toLocaleString('ar-EG');
+const sid  = id => document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
+const g$   = id => document.getElementById(id);
+const catL = c => ({kidana:'أبراج كدانة',vip:'فاخر VIP',classic:'كلاسيك',economy:'تحسين'})[c]||c;
+const sL   = s => ({new:'جديد',contacted:'تم التواصل',booked:'محجوز',cancelled:'ملغي'})[s]||s;
+const sC   = s => ({new:'s-new',contacted:'s-contacted',booked:'s-booked',cancelled:'s-cancelled'})[s]||'s-new';
+
+function toast(msg,type='ok',dur=3500){
+  const el=g$('toast'); el.textContent=msg; el.className=`show ${type}`;
+  clearTimeout(el._t); el._t=setTimeout(()=>el.className='',dur);
+}
+
+// ── 5-TAP LOGO → ADMIN ───────────────────
+let _lc=0, _lt=null;
+function initLogoTap(){
+  const logo = g$('nav-logo');
+  const ic   = g$('logo-ic');
+  const hint = g$('tap-hint');
+  logo.addEventListener('click', ()=>{
+    // scroll to top on normal click
+    if(_lc===0) window.scrollTo({top:0,behavior:'smooth'});
+    _lc++;
+    ic.classList.add('tap'); setTimeout(()=>ic.classList.remove('tap'),150);
+    // Show counter hint after 2nd tap
+    if(_lc>=2){
+      hint.textContent = `🔐 ${_lc}/5`;
+      hint.classList.add('show');
+    }
+    clearTimeout(_lt);
+    _lt = setTimeout(()=>{ _lc=0; hint.classList.remove('show'); }, 2500);
+    if(_lc>=5){
+      _lc=0; clearTimeout(_lt); hint.classList.remove('show');
+      showAdminLogin();
+    }
+  });
+}
+
+// ── CONNECTION CHECK ─────────────────────
+async function checkConn(){
+  if(!sb){ setCC('err','❌ Supabase غير مهيأ'); return false; }
+  setCC('load','جاري الاتصال...');
+  try {
+    const { error } = await sb.from('settings').select('id').eq('id',1).maybeSingle();
+    if(error) throw error;
+    setCC('ok','✅ متصل بقاعدة البيانات');
+    return true;
+  } catch(e){
+    setCC('err','❌ فشل الاتصال');
+    return false;
+  }
+}
+function setCC(t,msg){
+  const el=g$('cc'); if(!el) return;
+  el.className=`conn-chip cc-${t}`;
+  el.innerHTML=`<div class="cc-dot"></div><span>${msg}</span>`;
+}
+
+// ── VIEW SWITCHERS ───────────────────────
+function showAdminLogin(){
+  document.getElementById('adm-login').style.display='flex';
+  document.getElementById('adm-panel').style.display='none';
+  checkConn();
+}
+function hideAdminLogin(){
+  document.getElementById('adm-login').style.display='none';
+}
+function showAdminPanel(){
+  document.getElementById('adm-login').style.display='none';
+  document.getElementById('adm-panel').style.display='block';
+  const n = S.profile?.full_name || S.session?.user?.email?.split('@')[0]||'Admin';
+  g$('adm-usr').textContent='👤 '+n;
+  loadDashboard();
+  subscribeLeads();
+}
+function backToSite(){
+  document.getElementById('adm-panel').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ── AUTH (ADMIN + USER) ──────────────────
+async function checkAuth(){
+  if(!sb) return;
+  const { data:{ session } } = await sb.auth.getSession();
+  if(!session) return;
+  S.session=session;
+  const { data:pr } = await sb.from('profiles').select('*').eq('user_id',session.user.id).maybeSingle();
+  S.profile=pr;
+  if(pr?.role==='admin'){
+    showAdminPanel();
+  } else {
+    // Regular user — update nav
+    const name = pr?.full_name || session.user.email?.split('@')[0] || 'مستخدم';
+    updateUserNav(name);
+  }
+}
+
+// ── USER AUTH FUNCTIONS ──────────────────
+function openAuthModal(tab='signin'){
+  switchAuthTab(tab);
+  ['si-err','su-err'].forEach(id=>{const el=g$(id);if(el){el.classList.add('hidden');el.textContent='';}});
+  g$('auth-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(()=>g$(tab==='signin'?'si-email':'su-name')?.focus(),200);
+}
+function closeAuthModal(e){
+  if(!e||e.target===g$('auth-modal')){
+    g$('auth-modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+function switchAuthTab(tab){
+  g$('apane-si').classList.toggle('hidden',tab!=='signin');
+  g$('apane-su').classList.toggle('hidden',tab!=='signup');
+  g$('apane-ok').classList.add('hidden');
+  g$('atab-si').classList.toggle('active',tab==='signin');
+  g$('atab-su').classList.toggle('active',tab==='signup');
+}
+async function doSignIn(){
+  const email=g$('si-email').value.trim(), pass=g$('si-pass').value;
+  const errEl=g$('si-err'), btn=g$('si-btn');
+  if(!email||!pass){errEl.textContent='يرجى ملء جميع الحقول';errEl.classList.remove('hidden');return;}
+  btn.textContent='جاري الدخول...';btn.disabled=true;errEl.classList.add('hidden');
+  const{data,error}=await sb.auth.signInWithPassword({email,password:pass});
+  if(error){
+    errEl.textContent='البريد الإلكتروني أو كلمة المرور غير صحيحة';
+    errEl.classList.remove('hidden');btn.textContent='تسجيل الدخول';btn.disabled=false;return;
+  }
+  S.session=data.session;
+  const{data:pr}=await sb.from('profiles').select('*').eq('user_id',data.user.id).maybeSingle();
+  S.profile=pr;
+  const name=pr?.full_name||email.split('@')[0];
+  updateUserNav(name);
+  if(pr?.role==='admin'){
+    g$('aok-ic').textContent='⚙️';
+    g$('aok-title').textContent=`أهلاً، ${name}`;
+    g$('aok-sub').textContent='تم الدخول. اضغط على الشعار ٥ مرات للوصول للوحة التحكم.';
+  } else {
+    g$('aok-ic').textContent='✅';
+    g$('aok-title').textContent=`أهلاً بك، ${name} 👋`;
+    g$('aok-sub').textContent='يمكنك الآن متابعة طلباتك بسهولة.';
+  }
+  g$('apane-si').classList.add('hidden');
+  g$('apane-ok').classList.remove('hidden');
+  btn.textContent='تسجيل الدخول';btn.disabled=false;
+  setTimeout(()=>closeAuthModal(),2500);
+}
+async function doSignUp(){
+  const name=g$('su-name').value.trim(), email=g$('su-email').value.trim();
+  const phone=g$('su-phone').value.trim(), pass=g$('su-pass').value;
+  const errEl=g$('su-err'), btn=g$('su-btn');
+  if(!name||!email||!pass){errEl.textContent='يرجى ملء الحقول المطلوبة *';errEl.classList.remove('hidden');return;}
+  if(pass.length<8){errEl.textContent='كلمة المرور يجب أن تكون ٨ أحرف على الأقل';errEl.classList.remove('hidden');return;}
+  btn.textContent='جاري الإنشاء...';btn.disabled=true;errEl.classList.add('hidden');
+  const{data,error}=await sb.auth.signUp({email,password:pass,options:{data:{full_name:name}}});
+  if(error){errEl.textContent='خطأ: '+error.message;errEl.classList.remove('hidden');btn.textContent='إنشاء الحساب';btn.disabled=false;return;}
+  if(data.user){
+    await sb.from('profiles').upsert({user_id:data.user.id,email,full_name:name,phone:phone||null},{onConflict:'user_id'});
+  }
+  g$('aok-ic').textContent='📧';
+  g$('aok-title').textContent='تم إنشاء الحساب!';
+  g$('aok-sub').textContent='تحقق من بريدك الإلكتروني لتأكيد الحساب، ثم سجّل دخولك.';
+  g$('apane-su').classList.add('hidden');
+  g$('apane-ok').classList.remove('hidden');
+  btn.textContent='إنشاء الحساب';btn.disabled=false;
+}
+function updateUserNav(name){
+  const siBtn=g$('nav-si-btn'), box=g$('nav-user-box'), uname=g$('nav-uname');
+  if(name){
+    siBtn?.classList.add('hidden');
+    if(box){box.classList.remove('hidden');box.style.display='flex';}
+    if(uname) uname.textContent=name;
+  } else {
+    siBtn?.classList.remove('hidden');
+    if(box){box.classList.add('hidden');box.style.display='none';}
+  }
+}
+async function userLogout(){
+  if(S.profile?.role==='admin') g$('adm-panel').style.display='none';
+  await sb?.auth.signOut();
+  if(S.rt){sb.removeChannel(S.rt);S.rt=null;}
+  S.session=null;S.profile=null;
+  updateUserNav(null);
+  toast('تم تسجيل الخروج','info');
+}
+async function openMyRequests(){
+  g$('myreq-modal').classList.add('open');
+  document.body.style.overflow='hidden';
+  if(!S.session){
+    g$('myreq-list').innerHTML='<div style="text-align:center;padding:32px"><div style="font-size:40px;margin-bottom:12px">🔐</div><div style="color:var(--ts)">يرجى تسجيل الدخول أولاً لمتابعة طلباتك</div><button class="btn btn-primary" style="margin-top:16px" onclick="closeMyRequests();openAuthModal()">تسجيل الدخول</button></div>';
+    return;
+  }
+  const{data}=await sb.from('leads').select('*').eq('user_id',S.session.user.id).order('created_at',{ascending:false});
+  const list=data||[];
+  if(!list.length){
+    g$('myreq-list').innerHTML='<div style="text-align:center;padding:32px;color:var(--ts)"><div style="font-size:40px;margin-bottom:12px">📭</div>لا توجد طلبات مسجلة بعد</div>';
+    return;
+  }
+  g$('myreq-list').innerHTML=list.map(l=>`
+  <div class="req-card">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+      <div class="req-pkg">${esc(l.package_interest||'استشارة عامة')}</div>
+      <span class="sbadge ${sC(l.status)}">${sL(l.status)}</span>
+    </div>
+    <div class="req-meta">
+      ${l.budget?`💰 الميزانية: ${esc(l.budget)}<br>`:''}
+      ${l.pilgrims_count?`👥 عدد الحجاج: ${esc(l.pilgrims_count)}<br>`:''}
+      📅 ${new Date(l.created_at).toLocaleDateString('ar-EG')}
+      ${l.message?`<br>📝 ${esc(l.message)}`:''}
+    </div>
+  </div>`).join('');
+}
+function closeMyRequests(e){
+  if(!e||e.target===g$('myreq-modal')){
+    g$('myreq-modal').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+
+async function doLogin(){
+  const email=g$('a-email').value.trim(), pass=g$('a-pass').value;
+  const errEl=g$('alog-err'), btn=g$('login-btn');
+  if(!email||!pass){ errEl.textContent='يرجى ملء جميع الحقول'; errEl.classList.remove('hidden'); return; }
+  btn.textContent='جاري الدخول...'; btn.disabled=true; errEl.classList.add('hidden');
+  const { data, error } = await sb.auth.signInWithPassword({ email, password:pass });
+  if(error){ errEl.textContent='البريد الإلكتروني أو كلمة المرور غير صحيحة'; errEl.classList.remove('hidden'); btn.textContent='دخول'; btn.disabled=false; return; }
+  const { data:pr } = await sb.from('profiles').select('*').eq('user_id',data.user.id).maybeSingle();
+  if(!pr||pr.role!=='admin'){ await sb.auth.signOut(); errEl.textContent='هذا الحساب لا يمتلك صلاحيات الأدمن'; errEl.classList.remove('hidden'); btn.textContent='دخول'; btn.disabled=false; return; }
+  S.session=data.session; S.profile=pr;
+  btn.textContent='دخول'; btn.disabled=false;
+  showAdminPanel();
+}
+
+async function doLogout(){
+  await sb?.auth.signOut();
+  if(S.rt){ sb.removeChannel(S.rt); S.rt=null; }
+  S.session=null; S.profile=null;
+  document.getElementById('adm-panel').style.display='none';
+  toast('تم تسجيل الخروج','info');
+}
+
+// ── ADMIN TABS ───────────────────────────
+function aTab(name,btn){
+  document.querySelectorAll('.adt').forEach(el=>el.classList.remove('active'));
+  g$('t-'+name).classList.add('active');
+  document.querySelectorAll('.adl').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  ({leads:loadLeads,packages:loadAdmPkgs,testimonials:loadAdmTests,settings:loadSettingsForm,dashboard:loadDashboard})[name]?.();
+}
+
+// ── DASHBOARD ────────────────────────────
+async function loadDashboard(){
+  if(!sb) return;
+  try{
+    const [lr,pr]=await Promise.all([
+      sb.from('leads').select('id,status,name,phone,budget,package_interest,created_at').order('created_at',{ascending:false}),
+      sb.from('packages').select('id').eq('visible',true),
+    ]);
+    const leads=lr.data||[];
+    g$('st-total').textContent=leads.length;
+    g$('st-new').textContent=leads.filter(l=>l.status==='new').length;
+    g$('st-booked').textContent=leads.filter(l=>l.status==='booked').length;
+    g$('st-pkgs').textContent=(pr.data||[]).length;
+    g$('dash-tb').innerHTML=leads.slice(0,8).map(l=>`<tr>
+      <td style="font-weight:700">${esc(l.name)}</td>
+      <td style="direction:ltr"><a href="tel:${esc(l.phone)}" style="color:var(--g)">${esc(l.phone)}</a></td>
+      <td style="font-size:11px">${esc(l.budget||'-')}</td>
+      <td style="font-size:11px">${esc(l.package_interest||'-')}</td>
+      <td><span class="sbadge ${sC(l.status)}">${sL(l.status)}</span></td>
+      <td style="font-size:11px;color:var(--ts)">${new Date(l.created_at).toLocaleDateString('ar-EG')}</td>
+    </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">لا توجد طلبات بعد</td></tr>';
+  }catch(e){console.error(e);}
+}
+
+// ── LEADS ────────────────────────────────
+async function loadLeads(){
+  if(!sb) return;
+  g$('leads-tb').innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  const sf=g$('leads-f')?.value;
+  let q=sb.from('leads').select('*').order('created_at',{ascending:false});
+  if(sf) q=q.eq('status',sf);
+  const { data }=await q; S.leads=data||[]; renderLeads();
+}
+function renderLeads(){
+  const tb=g$('leads-tb');
+  if(!S.leads.length){ tb.innerHTML='<tr><td colspan="9" style="text-align:center;color:var(--ts);padding:24px">لا توجد طلبات</td></tr>'; return; }
+  tb.innerHTML=S.leads.map(l=>{
+    const wa=(l.whatsapp||l.phone||'').replace(/\D/g,'');
+    const msg=encodeURIComponent(`مرحباً ${l.name}، أنا من فريق الحج إيليت — بخصوص طلب الاستشارة...`);
+    return `<tr>
+      <td style="font-weight:700;min-width:110px">${esc(l.name)}</td>
+      <td style="direction:ltr;min-width:105px"><a href="tel:${esc(l.phone)}" style="color:var(--g)">${esc(l.phone)}</a></td>
+      <td>${esc(l.governorate||'-')}</td>
+      <td style="font-size:11px;min-width:110px">${esc(l.budget||'-')}</td>
+      <td>${esc(l.pilgrims_count||'-')}</td>
+      <td style="font-size:11px;min-width:120px">${esc(l.package_interest||'-')}</td>
+      <td><select class="fi" style="padding:5px 8px;font-size:12px;min-width:130px" onchange="updLead('${l.id}',this.value)">${['new','contacted','booked','cancelled'].map(s=>`<option value="${s}"${l.status===s?' selected':''}>${sL(s)}</option>`).join('')}</select></td>
+      <td style="font-size:11px;color:var(--ts);min-width:80px">${new Date(l.created_at).toLocaleDateString('ar-EG')}</td>
+      <td><a href="https://wa.me/${wa}?text=${msg}" target="_blank" class="btn btn-sm btn-wa" style="border-radius:8px">💬</a></td>
+    </tr>`;
+  }).join('');
+}
+async function updLead(id,status){
+  const{error}=await sb.from('leads').update({status}).eq('id',id);
+  if(error){toast('خطأ في التحديث','err');return;}
+  toast('تم تحديث الحالة ✓','ok');
+  const l=S.leads.find(x=>x.id===id); if(l) l.status=status;
+}
+
+// ── PACKAGES ADMIN ───────────────────────
+async function loadAdmPkgs(){
+  if(!sb) return;
+  g$('pkgs-tb').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  const{data}=await sb.from('packages').select('*').order('sort_order');
+  if(!data?.length){g$('pkgs-tb').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">لا توجد برامج</td></tr>';return;}
+  g$('pkgs-tb').innerHTML=data.map(p=>`<tr>
+    <td style="font-weight:800;color:var(--g)">${esc(p.code)}</td>
+    <td style="font-weight:700;min-width:150px">${esc(p.name)}</td>
+    <td><span style="background:var(--gl);color:var(--g);font-size:11px;padding:3px 9px;border-radius:8px;font-weight:700">${catL(p.category)}</span></td>
+    <td style="font-weight:700">${fmt(p.price)} ج</td>
+    <td style="color:${p.visible?'var(--g)':'var(--red)'};font-weight:700">${p.visible?'✅ ظاهر':'🔴 مخفي'}</td>
+    <td>${p.is_featured?'⭐':'-'}</td>
+    <td style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-outline" onclick='openPkgForm(${JSON.stringify(p)})'>تعديل</button>
+      <button class="btn btn-sm" style="background:${p.visible?'var(--red)':'var(--g)'};color:#fff" onclick="togglePkg('${p.id}',${p.visible})">${p.visible?'إخفاء':'إظهار'}</button>
+    </td>
+  </tr>`).join('');
+}
+function openPkgForm(p=null){
+  g$('pf-title').textContent=p?'تعديل البرنامج':'إضافة برنامج جديد';
+  const v=(id,val)=>{const el=g$(id);if(el)el.value=val??'';};
+  v('pf-id',p?.id);v('pf-code',p?.code);g$('pf-cat').value=p?.category||'kidana';
+  v('pf-name',p?.name);v('pf-desc',p?.description);v('pf-price',p?.price);v('pf-dep',p?.deposit||10000);
+  v('pf-dur',p?.duration_note);v('pf-sort',p?.sort_order||0);v('pf-mak',p?.makkah_hotel);v('pf-mad',p?.madinah_hotel);
+  v('pf-meals',p?.meal_plan||'إفطار وعشاء بوفيه مفتوح');v('pf-trans',p?.transport||'قطار الحرمين السريع');
+  v('pf-feats',Array.isArray(p?.features)?p.features.join('\n'):'');
+  g$('pf-vis').checked=p?!!p.visible:true; g$('pf-feat').checked=!!p?.is_featured;
+  g$('pkg-form-ov').classList.add('open');
+}
+function closePkgForm(e){if(!e||e.target===g$('pkg-form-ov'))g$('pkg-form-ov').classList.remove('open');}
+async function savePkg(){
+  const id=g$('pf-id').value;
+  const feats=g$('pf-feats').value.split('\n').map(f=>f.trim()).filter(Boolean);
+  const d={code:g$('pf-code').value.trim(),category:g$('pf-cat').value,name:g$('pf-name').value.trim(),description:g$('pf-desc').value.trim(),price:parseInt(g$('pf-price').value)||0,deposit:parseInt(g$('pf-dep').value)||10000,duration_note:g$('pf-dur').value.trim(),sort_order:parseInt(g$('pf-sort').value)||0,makkah_hotel:g$('pf-mak').value.trim(),madinah_hotel:g$('pf-mad').value.trim(),meal_plan:g$('pf-meals').value.trim(),transport:g$('pf-trans').value.trim(),features:feats,visible:g$('pf-vis').checked,is_featured:g$('pf-feat').checked};
+  if(!d.code||!d.name||!d.price){toast('يرجى ملء الحقول المطلوبة *','err');return;}
+  const btn=g$('pf-save'); btn.textContent='جاري الحفظ...'; btn.disabled=true;
+  const{error}=id?await sb.from('packages').update(d).eq('id',id):await sb.from('packages').insert(d);
+  btn.textContent='💾 حفظ البرنامج'; btn.disabled=false;
+  if(error){toast('خطأ: '+error.message,'err');return;}
+  toast('تم حفظ البرنامج ✓','ok'); g$('pkg-form-ov').classList.remove('open'); loadAdmPkgs(); loadPkgs();
+}
+async function togglePkg(id,vis){
+  const{error}=await sb.from('packages').update({visible:!vis}).eq('id',id);
+  if(error){toast('خطأ','err');return;} toast(vis?'تم الإخفاء':'تم الإظهار','ok'); loadAdmPkgs(); loadPkgs();
+}
+
+// ── TESTIMONIALS ADMIN ───────────────────
+async function loadAdmTests(){
+  if(!sb) return;
+  g$('tests-tb').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  const{data}=await sb.from('testimonials').select('*').order('sort_order');
+  if(!data?.length){g$('tests-tb').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">لا توجد آراء</td></tr>';return;}
+  g$('tests-tb').innerHTML=data.map(t=>`<tr>
+    <td style="font-weight:700">${esc(t.name)}</td>
+    <td style="font-size:12px;color:var(--ts)">${esc(t.role||'-')}</td>
+    <td style="color:var(--au)">${'★'.repeat(t.rating||5)}</td>
+    <td style="font-size:12px;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.content||'-')}</td>
+    <td style="color:${t.visible?'var(--g)':'var(--red)'}">${t.visible?'✅':'🔴'}</td>
+    <td style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-outline" onclick="openTestForm(${JSON.stringify(t)})">تعديل</button>
+      <button class="btn btn-sm btn-danger" onclick="delTest('${t.id}')">حذف</button>
+    </td>
+  </tr>`).join('');
+}
+function openTestForm(t=null){
+  g$('tf-title').textContent=t?'تعديل الرأي':'إضافة رأي جديد';
+  const v=(id,val)=>{const el=g$(id);if(el)el.value=val??'';};
+  v('tf-id',t?.id);v('tf-name',t?.name);v('tf-role',t?.role);v('tf-content',t?.content);v('tf-rating',t?.rating||5);v('tf-sort',t?.sort_order||0);
+  g$('tf-vis').checked=t?!!t.visible:true; g$('test-form-ov').classList.add('open');
+}
+function closeTestForm(e){if(!e||e.target===g$('test-form-ov'))g$('test-form-ov').classList.remove('open');}
+async function saveTest(){
+  const id=g$('tf-id').value;
+  const d={name:g$('tf-name').value.trim(),role:g$('tf-role').value.trim(),content:g$('tf-content').value.trim(),rating:parseInt(g$('tf-rating').value)||5,sort_order:parseInt(g$('tf-sort').value)||0,visible:g$('tf-vis').checked};
+  if(!d.name||!d.content){toast('الاسم والمحتوى مطلوبان','err');return;}
+  const{error}=id?await sb.from('testimonials').update(d).eq('id',id):await sb.from('testimonials').insert(d);
+  if(error){toast('خطأ في الحفظ','err');return;}
+  toast('تم الحفظ ✓','ok'); g$('test-form-ov').classList.remove('open'); loadAdmTests(); loadTests();
+}
+async function delTest(id){
+  if(!confirm('هل تريد حذف هذا الرأي نهائياً؟')) return;
+  const{error}=await sb.from('testimonials').delete().eq('id',id);
+  if(error){toast('خطأ','err');return;} toast('تم الحذف','ok'); loadAdmTests(); loadTests();
+}
+
+// ── SETTINGS ─────────────────────────────
+async function loadSettingsForm(){
+  if(!sb) return;
+  try{
+    const{data}=await sb.from('settings').select('*').eq('id',1).maybeSingle();
+    if(!data) return;
+    g$('s-ann').value=data.announcement_bar||''; g$('s-mq').value=data.marquee_text||'';
+    g$('s-wa').value=data.whatsapp_number||''; g$('s-em').value=data.email||'';
+  }catch(e){console.error(e);}
+}
+async function saveSettings(){
+  const d={announcement_bar:g$('s-ann').value,marquee_text:g$('s-mq').value,whatsapp_number:g$('s-wa').value,email:g$('s-em').value,updated_at:new Date().toISOString()};
+  const{error}=await sb.from('settings').update(d).eq('id',1);
+  if(error){toast('خطأ: '+error.message,'err');return;}
+  S.settings={...S.settings,...d}; applySettings(d); toast('تم حفظ الإعدادات ✓','ok');
+}
+async function changePass(){
+  const p1=g$('s-np').value, p2=g$('s-cp').value;
+  if(!p1){toast('يرجى إدخال كلمة المرور الجديدة','err');return;}
+  if(p1!==p2){toast('كلمتا المرور غير متطابقتين','err');return;}
+  if(p1.length<8){toast('كلمة المرور يجب أن تكون ٨ أحرف على الأقل','err');return;}
+  const{error}=await sb.auth.updateUser({password:p1});
+  if(error){toast('خطأ: '+error.message,'err');return;}
+  toast('تم تغيير كلمة المرور ✓','ok'); g$('s-np').value=''; g$('s-cp').value='';
+}
+
+// ── SETTINGS APPLY ───────────────────────
+async function loadSettings(){
+  if(!sb) return;
+  try{
+    const{data}=await sb.from('settings').select('*').eq('id',1).maybeSingle();
+    S.settings=data; if(data) applySettings(data);
+  }catch(_){}
+}
+function applySettings(s){
+  if(s.announcement_bar){const el=g$('ann-txt');if(el)el.textContent=s.announcement_bar;}
+  if(s.marquee_text){const t=g$('mq-track');if(t)t.innerHTML=`<span>${esc(s.marquee_text)}</span><span aria-hidden="true">${esc(s.marquee_text)}</span>`;}
+  if(s.whatsapp_number){const w=g$('wa-fab');if(w)w.href=`https://wa.me/${s.whatsapp_number}`;}
+  if(s.email||s.whatsapp_number){const c=g$('f-contact');if(c)c.innerHTML=`📧 ${esc(s.email||'info@hajjelite.com')}<br>💬 واتساب: ${esc(s.whatsapp_number||'قريباً')}<br>📍 القاهرة، مصر`;}
+}
+
+// ── REALTIME ─────────────────────────────
+function subscribeLeads(){
+  if(!sb||S.rt) return;
+  S.rt=sb.channel('rt-leads')
+    .on('postgres_changes',{event:'INSERT',schema:'public',table:'leads'},(payload)=>{
+      const l=payload.new;
+      g$('ln-s').textContent=`${l.name} — ${l.budget||'ميزانية غير محددة'}`;
+      const n=g$('ln'); n.classList.add('show'); setTimeout(()=>n.classList.remove('show'),9000);
+      try{
+        const ctx=new AudioContext(),osc=ctx.createOscillator(),gn=ctx.createGain();
+        osc.connect(gn);gn.connect(ctx.destination);osc.frequency.value=780;
+        gn.gain.setValueAtTime(.25,ctx.currentTime);gn.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.6);
+        osc.start();osc.stop(ctx.currentTime+.6);
+      }catch(_){}
+      const active=document.querySelector('.adt.active');
+      if(active?.id==='t-dashboard') loadDashboard();
+      else if(active?.id==='t-leads') loadLeads();
+    }).subscribe();
+}
+
+// ── STOREFRONT PACKAGES ──────────────────
+async function loadPkgs(){
+  if(!sb){document.getElementById('pkg-loading').style.display='none';renderStaticPkgs();return;}
+  try{
+    const{data}=await sb.from('packages').select('*').eq('visible',true).order('sort_order');
+    S.pkgs=data||[];
+  }catch(_){S.pkgs=[];}
+  if(!S.pkgs.length) renderStaticPkgs();
+  else renderPkgs('all');
+}
+function filterPkgs(f,btn){
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.fbtn').forEach(b=>{if(b.dataset.f===f)b.classList.add('active');});
+  renderPkgs(f);
+}
+function renderPkgs(f){
+  g$('pkg-loading').style.display='none';
+  let list=S.pkgs;
+  if(f==='featured') list=list.filter(p=>p.is_featured);
+  else if(f&&f!=='all') list=list.filter(p=>p.category===f);
+  const grid=g$('pkg-grid'), empty=g$('pkg-empty');
+  if(!list.length){grid.innerHTML='';empty.classList.remove('hidden');return;}
+  empty.classList.add('hidden'); grid.innerHTML=list.map(pkgCard).join('');
+}
+function pkgCard(p){
+  const dark=p.category==='kidana'||(p.is_featured&&p.category==='vip');
+  const feats=Array.isArray(p.features)?p.features:[];
+  const badge=p.category==='kidana'?'الأفخم':p.is_featured?'الأفضل':null;
+  return `
+  <div class="pkg-card${p.is_featured?' feat':''}" onclick="openPkgModal('${p.id}')">
+    ${badge?`<div class="pbadge ${p.category==='kidana'?'pb-gold':'pb-green'}">${badge}</div>`:''}
+    <div class="phead${dark?' phead-dk':''}">
+      <div class="pcode ${dark?'pc-lgt':'pc-drk'}">كود: ${esc(p.code)}</div>
+      <div class="pname ${dark?'pn-lgt':'pn-drk'}">${esc(p.name)}</div>
+      ${p.description?`<div class="psub ${dark?'ps-lgt':'ps-drk'}">${esc(p.description)}</div>`:''}
+      <div class="pprice">${fmt(p.price)} <span>جنيه/فرد</span></div>
+      <div class="pdep ${dark?'pd-lgt':'pd-drk'}">مقدم الحجز: ${fmt(p.deposit)} جنيه</div>
+    </div>
+    <div class="pbody">
+      ${p.makkah_hotel?`<div class="prow"><span class="prl">🕌 مكة</span><span class="prv">${esc(p.makkah_hotel)}</span></div>`:''}
+      ${p.madinah_hotel?`<div class="prow"><span class="prl">🕍 المدينة</span><span class="prv">${esc(p.madinah_hotel)}</span></div>`:''}
+      ${p.duration_note?`<div class="prow"><span class="prl">📅 المدة</span><span class="prv">${esc(p.duration_note)}</span></div>`:''}
+      ${p.meal_plan?`<div class="prow"><span class="prl">🍽️ الوجبات</span><span class="prv">${esc(p.meal_plan)}</span></div>`:''}
+      <div class="pfeat-wrap">
+        ${feats.slice(0,3).map(f=>`<span class="pfeat">${esc(f)}</span>`).join('')}
+        ${feats.length>3?`<span class="pfeat pfeat-more">+${feats.length-3}</span>`:''}
+      </div>
+      <button class="pcta ${p.is_featured?'pcta-gold':'pcta-green'}">احجز استشارة مجانية ←</button>
+    </div>
+  </div>`;
+}
+function renderStaticPkgs(){
+  S.pkgs=[
+    {id:'1',code:'DS-K',category:'kidana',name:'النخبة — أبراج كدانة الوادي',description:'مخيمات VIP فاخرة بعرفة',price:645000,deposit:10000,duration_note:'أو ١٤ يوم',makkah_hotel:'موفنبيك هاجر سويس المقام',madinah_hotel:'موفنبيك أنوار المدينة (برج الحرم)',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['أبراج كدانة الوادي','إقامة VIP بمنى','صالة كبار الزوار'],visible:true,is_featured:true},
+    {id:'2',code:'DS-1 VIP',category:'vip',name:'فاخر VIP — موفنبيك هاجر',description:'مخيمات الراحجي ٥ نجوم',price:560000,deposit:10000,duration_note:'١١ يوم المدينة أولاً',makkah_hotel:'موفنبيك هاجر سويس المقام',madinah_hotel:'موفنبيك أنوار المدينة',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['مخيمات الراحجي ٥ نجوم','صالة كبار الزوار','زيارة الروضة'],visible:true,is_featured:true},
+    {id:'3',code:'DS-8',category:'economy',name:'تحسين ١٥ يوم — أبراج الساعة',description:'فنادق على بلاط الحرم مباشرة',price:250000,deposit:5000,duration_note:'١٥ يوم المدينة أولاً',makkah_hotel:'موفنبيك هاجر — أبراج الساعة',madinah_hotel:'المفتارة العالمي',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['بلاط الحرم مباشرة','إشراف ديني','هدايا مميزة'],visible:true,is_featured:true},
+    {id:'4',code:'DS-2 VIP',category:'vip',name:'VIP — الحرم المدني',description:'مخيمات الراحجي ٥ نجوم',price:545000,deposit:10000,duration_note:'١١ يوم المدينة أولاً',makkah_hotel:'موفنبيك هاجر سويس المقام',madinah_hotel:'الحرم المدني',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['مخيمات الراحجي ٥ نجوم','إشراف ديني'],visible:true,is_featured:false},
+    {id:'5',code:'DS-1 كلاسيك',category:'classic',name:'كلاسيك ١٤ يوم — موفنبيك',description:'مخيمات الراحجي ٥ نجوم',price:560000,deposit:10000,duration_note:'١٤ يوم المدينة أولاً',makkah_hotel:'موفنبيك هاجر سويس المقام',madinah_hotel:'الحرم',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['مخيمات الراحجي','برنامج ١٤ يوم'],visible:true,is_featured:false},
+    {id:'6',code:'DS-6',category:'economy',name:'تحسين ٢٣ يوم — بولمان زمزم',description:'أبراج الساعة على بلاط الحرم',price:262000,deposit:5000,duration_note:'مكة أولاً',makkah_hotel:'بولمان زمزم — أبراج الساعة',madinah_hotel:'المفتارة العالمي',meal_plan:'إفطار وعشاء بوفيه مفتوح',features:['بلاط الحرم مباشرة','٢٣ يوم'],visible:true,is_featured:false},
+  ];
+  renderPkgs('all');
+}
+
+// ── PACKAGE MODAL ────────────────────────
+function openPkgModal(id){
+  const p=S.pkgs.find(x=>x.id===id); if(!p) return;
+  S.selPkg=p;
+  const feats=Array.isArray(p.features)?p.features:[];
+  g$('pm-code').textContent='كود: '+p.code;
+  g$('pm-name').textContent=p.name;
+  g$('pm-sub').textContent=p.description||'';
+  g$('pm-price').innerHTML=fmt(p.price)+' <span style="font-size:14px;font-weight:400">جنيه/فرد</span>';
+  g$('pm-dep').textContent='مقدم الحجز: '+fmt(p.deposit)+' جنيه';
+  g$('pm-details').innerHTML=[
+    p.makkah_hotel&&['🕌','مكة المكرمة',p.makkah_hotel],
+    p.madinah_hotel&&['🕍','المدينة المنورة',p.madinah_hotel],
+    p.duration_note&&['📅','المدة',p.duration_note],
+    p.meal_plan&&['🍽️','الوجبات',p.meal_plan],
+    p.transport&&['🚆','التنقلات',p.transport],
+  ].filter(Boolean).map(([ic,lb,vl])=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px"><span style="color:var(--ts)">${ic} ${lb}</span><span style="font-weight:700;font-size:12px;max-width:200px;text-align:left">${esc(vl)}</span></div>`).join('');
+  g$('pm-feats').innerHTML=feats.length?`<div style="font-weight:700;font-size:13px;margin-top:14px;margin-bottom:8px">✨ المميزات</div><div style="display:flex;flex-wrap:wrap;gap:5px">${feats.map(f=>`<span class="pfeat">${esc(f)}</span>`).join('')}</div>`:'';
+  const wa=S.settings?.whatsapp_number||'201000000000';
+  g$('pm-wa').href=`https://wa.me/${wa}?text=${encodeURIComponent(`مرحباً، أريد الاستفسار عن برنامج ${p.name} (${p.code}) بسعر ${fmt(p.price)} جنيه`)}`;
+  g$('pkg-modal').classList.add('open'); document.body.style.overflow='hidden';
+  track('ViewContent',{content_name:p.name,content_ids:[p.id],value:p.price,currency:'EGP'});
+  history.pushState({pkg:p.id},'',`?package=${p.id}`);
+}
+function closePkgModal(e){
+  if(!e||e.target===g$('pkg-modal')){
+    g$('pkg-modal').classList.remove('open'); document.body.style.overflow='';
+    S.selPkg=null; history.pushState({},'',window.location.pathname);
+    ['pm-n','pm-p','pm-pil','pm-msg'].forEach(id=>{const el=g$(id);if(el)el.value='';});
+  }
+}
+async function submitModalLead(){
+  const name=g$('pm-n').value.trim(), phone=g$('pm-p').value.trim();
+  if(!name||!phone){toast('يرجى إدخال الاسم ورقم الهاتف','err');return;}
+  const btn=g$('pm-submit'); btn.textContent='جاري الإرسال...'; btn.disabled=true;
+  const p=S.selPkg;
+  if(sb){
+    const{error}=await sb.from('leads').insert({
+      name:name.replace(/[<>'"]/g,''),phone:phone.replace(/[^0-9+\-\s]/g,''),
+      pilgrims_count:g$('pm-pil').value||null,
+      message:(g$('pm-msg').value||'').replace(/[<>]/g,'').trim()||null,
+      package_interest:p?`${p.code} — ${p.name}`:null,source:'package_modal',
+    });
+    if(error){toast('خطأ في الإرسال. حاول مرة أخرى.','err');btn.textContent='احجز هذا البرنامج ←';btn.disabled=false;return;}
+  }
+  toast('✅ تم إرسال طلبك! سنتواصل معك قريباً','ok',5000);
+  track('Lead',{value:p?.price||0,currency:'EGP',content_name:p?.name||''});
+  btn.textContent='احجز هذا البرنامج ←'; btn.disabled=false;
+  setTimeout(()=>closePkgModal(),2200);
+}
+
+// ── LEAD FORM ────────────────────────────
+async function submitLead(){
+  const name=g$('l-name').value.trim(), phone=g$('l-phone').value.trim();
+  if(!name||!phone){toast('يرجى إدخال الاسم ورقم الهاتف على الأقل','err');return;}
+  if(sb){
+    const{error}=await sb.from('leads').insert({
+      name:name.replace(/[<>'"]/g,''),phone:phone.replace(/[^0-9+\-\s]/g,''),
+      governorate:g$('l-gov').value||null,budget:g$('l-budget').value||null,
+      pilgrims_count:g$('l-pil').value||null,source:'homepage_form',
+    });
+    if(error){toast('خطأ في الإرسال. حاول مرة أخرى.','err');return;}
+  }
+  track('Lead',{currency:'EGP'});
+  g$('lead-wrap').innerHTML=`<div class="lead-ok"><div class="lok-ic">✅</div><div class="lok-t">تم استلام طلبك بنجاح!</div><p class="lok-s">سيتواصل معك فريقنا على رقم <strong style="color:#fff">${esc(phone)}</strong><br>خلال ٢٤ ساعة. تقبل الله منا ومنكم 🤲</p></div>`;
+}
+
+// ── TESTIMONIALS ─────────────────────────
+async function loadTests(){
+  if(!sb){renderStaticTests();return;}
+  try{
+    const{data}=await sb.from('testimonials').select('*').eq('visible',true).order('sort_order');
+    if(data?.length){renderTests(data);return;}
+  }catch(_){}
+  renderStaticTests();
+}
+function renderTests(list){
+  g$('test-grid').innerHTML=list.map(t=>`
+  <div class="tcard">
+    <div class="tstars">${'★'.repeat(t.rating||5)}</div>
+    <div class="ttxt">"${esc(t.content)}"</div>
+    <div class="tauth">
+      <div class="tav">${esc(t.name).charAt(2)||esc(t.name).charAt(0)}</div>
+      <div><div class="tname">${esc(t.name)}</div>${t.role?`<div class="trole">${esc(t.role)}</div>`:''}</div>
+    </div>
+  </div>`).join('');
+}
+function renderStaticTests(){renderTests([
+  {name:'د. محمد العربي',role:'طبيب استشاري، القاهرة',content:'تجربة حج استثنائية. رافقني الفريق في كل خطوة والفندق على مسافة خطوات من الحرم.',rating:5},
+  {name:'أ. سامي حسين',role:'رجل أعمال، الإسكندرية',content:'باقة أبراج كدانة تستحق كل قرش. مخيمات عرفة كانت أفخم مما توقعت والفريق محترف.',rating:5},
+  {name:'م. هالة رشيد',role:'مهندسة، الجيزة',content:'أحضرت والديّ وكانت رحلتهما مثالية. الفريق اهتم بكل تفصيلة وأمي لا تزال تتحدث عنها.',rating:5},
+]);}
+
+// ── FAQ ──────────────────────────────────
+function renderFaq(){
+  const faqs=[
+    ['هل الباقات تشمل تذاكر الطيران؟','لا، الأسعار لا تشمل تذاكر الطيران. السفر على خطوط مصر للطيران أو الطيران السعودي.'],
+    ['هل يشترط وجود محرم للسيدات؟','لا يشترط وجود محرم للسيدات فوق سن ٢٥ عاماً وفقاً لاشتراطات الحج.'],
+    ['ما مقدم الحجز المبدئي؟','١٠,٠٠٠ جنيه للبرامج الفاخرة و٥,٠٠٠ جنيه لبرامج التحسين.'],
+    ['هل الحج متاح بدون قرعة؟','نعم، جميع برامجنا حج مباشر بدون قرعة وفقاً لضوابط وزارة السياحة المصرية.'],
+    ['ما الإشراف الديني المتاح؟','دعاة متميزون يرافقون الحجاج طوال الرحلة لشرح المناسك والرد على الاستفسارات.'],
+    ['كيف يتم الانتقال من المدينة إلى مكة؟','بقطار الحرمين السريع في جميع البرامج لراحة الحجاج.'],
+  ];
+  g$('faq-wrap').innerHTML=faqs.map(([q,a])=>`
+  <div class="faq-item">
+    <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qt">${esc(q)}</span><span class="faq-tog">+</span></div>
+    <div class="faq-a">${esc(a)}</div>
+  </div>`).join('');
+}
+function toggleFaq(el){
+  const open=el.classList.contains('open');
+  document.querySelectorAll('.faq-q.open').forEach(q=>{q.classList.remove('open');q.nextElementSibling.style.display='none';q.querySelector('.faq-tog').textContent='+';});
+  if(!open){el.classList.add('open');el.nextElementSibling.style.display='block';el.querySelector('.faq-tog').textContent='−';}
+}
+
+// ── DEEP LINK ────────────────────────────
+function checkDeepLink(){
+  const id=new URLSearchParams(window.location.search).get('package');
+  if(id&&S.pkgs.length){const p=S.pkgs.find(x=>x.id===id);if(p)openPkgModal(p.id);}
+}
+window.addEventListener('popstate',e=>{if(!e.state?.pkg)closePkgModal();});
+
+// ── INIT ─────────────────────────────────
+async function init(){
+  // Fix 100vh mobile
+  const setVh=()=>document.documentElement.style.setProperty('--vh',`${window.innerHeight*.01}px`);
+  setVh(); window.addEventListener('resize',setVh);
+  // Logo 5-tap
+  initLogoTap();
+  // Load data
+  await loadSettings();
+  await loadPkgs();
+  await loadTests();
+  renderFaq();
+  // Check existing session (admin may already be logged in)
+  await checkAuth();
+  // Deep link
+  checkDeepLink();
+}
+
+init();
+</script>
+</body>
+</html>
