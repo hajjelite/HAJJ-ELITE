@@ -8,6 +8,7 @@
 <!-- Meta Pixel — ضع رقمك هنا -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID');fbq('track','PageView');</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -580,6 +581,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       <button class="adl" onclick="aTab('leads',this)">📋 الطلبات</button>
       <button class="adl" onclick="aTab('packages',this)">📦 البرامج</button>
       <button class="adl" onclick="aTab('testimonials',this)">⭐ الآراء</button>
+      <button class="adl" onclick="aTab('faqs',this)">❓ الأسئلة الشائعة</button>
       <button class="adl" onclick="aTab('settings',this)">🔧 الإعدادات</button>
     </div>
     <div class="adm-right">
@@ -611,6 +613,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <select class="fi btn-sm" id="leads-f" onchange="loadLeads()" style="width:auto;padding:7px 12px"><option value="">كل الحالات</option><option value="new">جديد</option><option value="contacted">تم التواصل</option><option value="booked">محجوز</option><option value="cancelled">ملغي</option></select>
           <button class="btn btn-sm btn-outline" onclick="loadLeads()">🔄</button>
+          <button class="btn btn-sm" style="background:#1D6F42;color:#fff" onclick="exportLeadsExcel()">⬇️ تصدير Excel</button>
         </div>
       </div>
       <div class="tbl-wrap tbl-scroll"><table class="adm-tbl" style="min-width:820px"><thead><tr><th>الاسم</th><th>الهاتف</th><th>المحافظة</th><th>الميزانية</th><th>الحجاج</th><th>البرنامج</th><th>الحالة</th><th>التاريخ</th><th>تواصل</th></tr></thead><tbody id="leads-tb"><tr><td colspan="9" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
@@ -626,6 +629,23 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
     <div class="adt" id="t-testimonials">
       <div class="adt-hdr"><h2>⭐ إدارة الآراء</h2><button class="btn btn-sm btn-primary" onclick="openTestForm()">+ إضافة رأي</button></div>
       <div class="tbl-wrap"><table class="adm-tbl"><thead><tr><th>الاسم</th><th>الوصف</th><th>التقييم</th><th>المحتوى</th><th>الظهور</th><th>إجراءات</th></tr></thead><tbody id="tests-tb"><tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+    </div>
+
+    <!-- FAQs -->
+    <div class="adt" id="t-faqs">
+      <div class="adt-hdr">
+        <h2>❓ الأسئلة الشائعة</h2>
+        <button class="btn btn-sm btn-primary" onclick="openFaqForm()">+ إضافة سؤال</button>
+      </div>
+      <div class="tbl-wrap">
+        <table class="adm-tbl">
+          <thead><tr><th>السؤال</th><th>الإجابة</th><th>الترتيب</th><th>الظهور</th><th>إجراءات</th></tr></thead>
+          <tbody id="faqs-tb"><tr><td colspan="5" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;padding:12px 16px;background:var(--al);border-radius:10px;font-size:12px;color:var(--ad)">
+        💡 الأسئلة هتظهر في الموقع تلقائياً حسب الترتيب. الأرقام الأصغر تظهر أول.
+      </div>
     </div>
 
     <!-- Settings -->
@@ -687,6 +707,26 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="closePkgForm()">إلغاء</button>
       <button class="btn btn-primary" id="pf-save" onclick="savePkg()">💾 حفظ البرنامج</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Form Modal -->
+<div class="overlay" id="faq-form-ov" onclick="closeFaqForm(event)">
+  <div class="modal" style="max-width:560px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3 id="ff-title">إضافة سؤال جديد</h3><button class="mclose" onclick="closeFaqForm()">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="ff-id">
+      <div class="fg"><label class="flbl">السؤال *</label><input class="fi" id="ff-q" placeholder="اكتب السؤال هنا..."></div>
+      <div class="fg"><label class="flbl">الإجابة *</label><textarea class="fi" id="ff-a" rows="4" placeholder="اكتب الإجابة هنا..." style="resize:vertical"></textarea></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">الترتيب (الأصغر يظهر أول)</label><input class="fi" id="ff-sort" type="number" value="0" min="0"></div>
+        <div class="fg" style="display:flex;align-items:flex-end"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;margin-bottom:13px"><input type="checkbox" id="ff-vis" checked> ظاهر في الموقع</label></div>
+      </div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeFaqForm()">إلغاء</button>
+      <button class="btn btn-primary" onclick="saveFaq()">💾 حفظ السؤال</button>
     </div>
   </div>
 </div>
@@ -986,7 +1026,7 @@ function aTab(name,btn){
   g$('t-'+name).classList.add('active');
   document.querySelectorAll('.adl').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  ({leads:loadLeads,packages:loadAdmPkgs,testimonials:loadAdmTests,settings:loadSettingsForm,dashboard:loadDashboard})[name]?.();
+  ({leads:loadLeads,packages:loadAdmPkgs,testimonials:loadAdmTests,faqs:loadAdmFaqs,settings:loadSettingsForm,dashboard:loadDashboard})[name]?.();
 }
 
 // ── DASHBOARD ────────────────────────────
@@ -1352,7 +1392,85 @@ function renderStaticTests(){renderTests([
   {name:'م. هالة رشيد',role:'مهندسة، الجيزة',content:'أحضرت والديّ وكانت رحلتهما مثالية. الفريق اهتم بكل تفصيلة وأمي لا تزال تتحدث عنها.',rating:5},
 ]);}
 
-// ── FAQ ──────────────────────────────────
+// ── FAQ ADMIN ─────────────────────────────
+async function loadAdmFaqs(){
+  if(!sb) return;
+  g$('faqs-tb').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  const{data}=await sb.from('faqs').select('*').order('sort_order');
+  if(!data?.length){g$('faqs-tb').innerHTML='<tr><td colspan="5" style="text-align:center;color:var(--ts);padding:24px">لا توجد أسئلة — اضغط "+ إضافة سؤال"</td></tr>';return;}
+  g$('faqs-tb').innerHTML=data.map(f=>`<tr>
+    <td style="font-weight:700;min-width:180px;max-width:220px">${esc(f.question)}</td>
+    <td style="font-size:12px;color:var(--ts);min-width:200px;max-width:280px;white-space:normal;line-height:1.5">${esc(f.answer)}</td>
+    <td style="text-align:center;font-weight:700;color:var(--g)">${f.sort_order}</td>
+    <td style="color:${f.visible?'var(--g)':'var(--red)'};font-weight:700">${f.visible?'✅ ظاهر':'🔴 مخفي'}</td>
+    <td style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-outline" onclick="openFaqForm(${JSON.stringify(f)})">تعديل</button>
+      <button class="btn btn-sm" style="background:${f.visible?'var(--red)':'var(--g)'};color:#fff" onclick="toggleFaqVis('${f.id}',${f.visible})">${f.visible?'إخفاء':'إظهار'}</button>
+      <button class="btn btn-sm btn-danger" onclick="deleteFaq('${f.id}')">حذف</button>
+    </td>
+  </tr>`).join('');
+}
+function openFaqForm(f=null){
+  g$('ff-title').textContent=f?'تعديل السؤال':'إضافة سؤال جديد';
+  g$('ff-id').value=f?.id||'';
+  g$('ff-q').value=f?.question||'';
+  g$('ff-a').value=f?.answer||'';
+  g$('ff-sort').value=f?.sort_order??0;
+  g$('ff-vis').checked=f?!!f.visible:true;
+  g$('faq-form-ov').classList.add('open');
+  setTimeout(()=>g$('ff-q').focus(),200);
+}
+function closeFaqForm(e){
+  if(!e||e.target===g$('faq-form-ov')) g$('faq-form-ov').classList.remove('open');
+}
+async function saveFaq(){
+  const id=g$('ff-id').value;
+  const d={
+    question:g$('ff-q').value.trim(),
+    answer:g$('ff-a').value.trim(),
+    sort_order:parseInt(g$('ff-sort').value)||0,
+    visible:g$('ff-vis').checked,
+  };
+  if(!d.question||!d.answer){toast('السؤال والإجابة مطلوبان *','err');return;}
+  const{error}=id
+    ?await sb.from('faqs').update(d).eq('id',id)
+    :await sb.from('faqs').insert(d);
+  if(error){toast('خطأ: '+error.message,'err');return;}
+  toast('تم حفظ السؤال ✓','ok');
+  g$('faq-form-ov').classList.remove('open');
+  loadAdmFaqs();
+  loadFaqFromDB();
+}
+async function toggleFaqVis(id,vis){
+  const{error}=await sb.from('faqs').update({visible:!vis}).eq('id',id);
+  if(error){toast('خطأ','err');return;}
+  toast(vis?'تم الإخفاء':'تم الإظهار','ok');
+  loadAdmFaqs(); loadFaqFromDB();
+}
+async function deleteFaq(id){
+  if(!confirm('هل تريد حذف هذا السؤال نهائياً؟')) return;
+  const{error}=await sb.from('faqs').delete().eq('id',id);
+  if(error){toast('خطأ في الحذف','err');return;}
+  toast('تم الحذف','ok'); loadAdmFaqs(); loadFaqFromDB();
+}
+
+// ── FAQ STOREFRONT (من Supabase) ─────────
+async function loadFaqFromDB(){
+  if(!sb){renderFaq();return;}
+  try{
+    const{data}=await sb.from('faqs').select('*').eq('visible',true).order('sort_order');
+    if(data?.length){
+      g$('faq-wrap').innerHTML=data.map(f=>`
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)"><span class="faq-qt">${esc(f.question)}</span><span class="faq-tog">+</span></div>
+        <div class="faq-a">${esc(f.answer)}</div>
+      </div>`).join('');
+      return;
+    }
+  }catch(_){}
+  renderFaq();
+  loadFaqFromDB(); // fallback static
+}
 function renderFaq(){
   const faqs=[
     ['هل الباقات تشمل تذاكر الطيران؟','لا، الأسعار لا تشمل تذاكر الطيران. السفر على خطوط مصر للطيران أو الطيران السعودي.'],
