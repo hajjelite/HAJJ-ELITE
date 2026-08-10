@@ -287,6 +287,31 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 .req-card{background:var(--bg);border-radius:12px;padding:14px 16px;border:1px solid var(--bd);margin-bottom:10px}
 .req-pkg{font-weight:800;font-size:14px;margin-bottom:6px}
 .req-meta{font-size:12px;color:var(--ts);line-height:1.8}
+/* ── MOBILE MENU ── */
+.ham{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;justify-content:center;gap:5px;min-width:40px;min-height:40px}
+.ham-l{width:22px;height:2px;background:var(--tx);border-radius:2px;transition:all .3s;display:block}
+.mob-nav{position:fixed;top:64px;right:0;left:0;background:#fff;border-bottom:2px solid var(--bd);padding:12px 16px 20px;display:none;flex-direction:column;gap:6px;z-index:988;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+.mob-nav.open{display:flex}
+.mob-nl{padding:13px 16px;border-radius:11px;font-size:15px;font-weight:600;color:var(--tx);border:none;background:none;text-align:right;cursor:pointer;width:100%;font-family:var(--f);min-height:48px}
+.mob-nl:hover,.mob-nl:active{background:var(--gl);color:var(--g)}
+.mob-divider{height:1px;background:var(--bd);margin:4px 0}
+.mob-cta{background:linear-gradient(135deg,var(--au),var(--ad));color:var(--tx);padding:14px 16px;border-radius:12px;font-size:15px;font-weight:900;border:none;cursor:pointer;width:100%;font-family:var(--f);min-height:48px}
+.mob-si{border:2px solid var(--g);color:var(--g);padding:13px 16px;border-radius:12px;font-size:15px;font-weight:700;background:transparent;cursor:pointer;width:100%;font-family:var(--f);min-height:48px}
+.mob-user-row{display:flex;gap:8px;align-items:center;padding:8px 4px}
+.mob-uname{font-size:14px;color:var(--g);font-weight:800;flex:1}
+.mob-my-req{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;background:var(--gl);color:var(--g);border:none;cursor:pointer;font-family:var(--f)}
+.mob-logout{padding:10px 14px;border-radius:10px;font-size:13px;font-weight:700;background:#FEE2E2;color:var(--red);border:none;cursor:pointer;font-family:var(--f)}
+/* ── iOS SAFE AREA ── */
+@supports(padding:max(0px)){
+  #wa-fab{bottom:max(22px, calc(16px + env(safe-area-inset-bottom)))}
+  .mob-nav{padding-bottom:max(20px, env(safe-area-inset-bottom))}
+  footer{padding-bottom:max(24px, env(safe-area-inset-bottom))}
+}
+/* ── TOUCH TARGETS ── */
+.btn{min-height:44px}
+.fbtn{min-height:44px}
+.nl{min-height:40px}
+.faq-q{min-height:52px}
 /* ── RESPONSIVE ── */
 @media(max-width:900px){.trust-in{grid-template-columns:repeat(2,1fr)}.ti:nth-child(2){border-left:none}}
 @media(max-width:768px){.hero{padding:56px 16px 44px}.hero h1{font-size:26px}.hst{padding:0 14px}.pkg-grid{grid-template-columns:1fr}.frow{grid-template-columns:1fr}.test-grid{grid-template-columns:1fr}.ft-grid{grid-template-columns:1fr 1fr}.nl{display:none}.adm-body{padding:14px 12px}.stt-grid{grid-template-columns:repeat(2,1fr)}.tbl-scroll{overflow-x:auto}.adm-tbl{min-width:600px}}
@@ -876,7 +901,41 @@ async function checkAuth(){
   }
 }
 
-// ── USER AUTH FUNCTIONS ──────────────────
+// ── MOBILE MENU ──────────────────────────
+function toggleMobMenu(){
+  const menu=g$('mob-nav'), btn=g$('ham-btn');
+  const isOpen=menu.classList.toggle('open');
+  // Animate hamburger
+  const lines=btn.querySelectorAll('.ham-l');
+  if(isOpen){
+    lines[0].style.cssText='transform:rotate(45deg) translate(5px,5px)';
+    lines[1].style.cssText='opacity:0';
+    lines[2].style.cssText='transform:rotate(-45deg) translate(5px,-5px)';
+  } else {
+    lines.forEach(l=>l.style.cssText='');
+  }
+}
+function closeMobMenu(){
+  const menu=g$('mob-nav'), btn=g$('ham-btn');
+  if(!menu) return;
+  menu.classList.remove('open');
+  btn?.querySelectorAll('.ham-l').forEach(l=>l.style.cssText='');
+}
+function updateMobUserNav(name){
+  const guest=g$('mob-guest'), user=g$('mob-user'), uname=g$('mob-uname');
+  if(name){
+    guest?.classList.add('hidden');
+    user?.classList.remove('hidden');
+    if(uname) uname.textContent='👤 '+name;
+  } else {
+    guest?.classList.remove('hidden');
+    user?.classList.add('hidden');
+  }
+}
+// Close mobile menu on outside tap
+document.addEventListener('click', e=>{
+  if(!e.target.closest('#mob-nav') && !e.target.closest('#ham-btn')) closeMobMenu();
+},{passive:true});
 function openAuthModal(tab='signin'){
   switchAuthTab(tab);
   ['si-err','su-err'].forEach(id=>{const el=g$(id);if(el){el.classList.add('hidden');el.textContent='';}});
@@ -912,6 +971,7 @@ async function doSignIn(){
   S.profile=pr;
   const name=pr?.full_name||email.split('@')[0];
   updateUserNav(name);
+  updateMobUserNav(name);
   if(pr?.role==='admin'){
     g$('aok-ic').textContent='⚙️';
     g$('aok-title').textContent=`أهلاً، ${name}`;
@@ -962,6 +1022,7 @@ async function userLogout(){
   if(S.rt){sb.removeChannel(S.rt);S.rt=null;}
   S.session=null;S.profile=null;
   updateUserNav(null);
+  updateMobUserNav(null);
   toast('تم تسجيل الخروج','info');
 }
 async function openMyRequests(){
