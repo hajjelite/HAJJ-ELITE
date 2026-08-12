@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>الحج إيليت — HAJJ ELITE | برامج الحج الفاخرة ١٤٤٧ هـ</title>
 <meta name="description" content="برامج حج فاخرة من دار السفر تورز. من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه. حج مباشر بدون قرعة.">
+<!-- Open Graph للفيسبوك -->
+<meta property="og:title" content="الحج إيليت — برامج الحج الفاخرة ١٤٤٧ هـ">
+<meta property="og:description" content="برامج حج فاخرة من دار السفر تورز. من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه. حج مباشر بدون قرعة.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hajjelite.github.io/HAJJ-ELITE/">
+<meta property="og:image" content="https://hajjelite.github.io/HAJJ-ELITE/og-image.jpg">
+<meta property="og:locale" content="ar_AR">
+<meta name="theme-color" content="#0F6B4B">
 <!-- Meta Pixel — ضع رقمك هنا -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID');fbq('track','PageView');</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -287,6 +295,19 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 .req-card{background:var(--bg);border-radius:12px;padding:14px 16px;border:1px solid var(--bd);margin-bottom:10px}
 .req-pkg{font-weight:800;font-size:14px;margin-bottom:6px}
 .req-meta{font-size:12px;color:var(--ts);line-height:1.8}
+/* ── FACEBOOK IN-APP BROWSER SCREEN ── */
+#fb-screen{position:fixed;inset:0;background:linear-gradient(150deg,var(--g),var(--gd));z-index:99999;display:flex;align-items:center;justify-content:center;padding:24px}
+.fb-card{background:#fff;border-radius:24px;padding:36px 28px;max-width:380px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.fb-ic{font-size:56px;margin-bottom:16px}
+.fb-title{font-size:20px;font-weight:900;color:var(--tx);margin-bottom:10px}
+.fb-sub{font-size:14px;color:var(--ts);line-height:1.8;margin-bottom:24px}
+.fb-steps{text-align:right;background:var(--bg);border-radius:14px;padding:16px 18px;margin-bottom:22px}
+.fb-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;font-size:14px;color:var(--tx)}
+.fb-step:last-child{margin-bottom:0}
+.fb-step-n{width:24px;height:24px;background:var(--g);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0;margin-top:1px}
+.fb-url{background:var(--gl);border:1px solid var(--g);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--g);font-weight:700;word-break:break-all;margin-bottom:16px;direction:ltr;text-align:left}
+.fb-copy-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;font-family:var(--f);margin-bottom:10px}
+.fb-skip{background:none;border:none;color:var(--ts);font-size:13px;cursor:pointer;font-family:var(--f);text-decoration:underline}
 /* ── MOBILE MENU ── */
 .ham{display:none;background:none;border:none;cursor:pointer;padding:8px;flex-direction:column;justify-content:center;gap:5px;min-width:40px;min-height:40px}
 .ham-l{width:22px;height:2px;background:var(--tx);border-radius:2px;transition:all .3s;display:block}
@@ -324,6 +345,32 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
      STOREFRONT
 ══════════════════════════════════════ -->
 <div id="storefront">
+
+<!-- Facebook In-App Browser Screen -->
+<div id="fb-screen" class="hidden">
+  <div class="fb-card">
+    <div class="fb-ic">🌐</div>
+    <div class="fb-title">افتح في المتصفح</div>
+    <div class="fb-sub">الموقع محتاج يتفتح في متصفح Chrome أو Safari عشان يشتغل صح</div>
+    <div class="fb-steps">
+      <div class="fb-step">
+        <div class="fb-step-n">١</div>
+        <div><strong>اضغط على النقاط</strong> (⋮) أو سهم المشاركة في الأعلى</div>
+      </div>
+      <div class="fb-step">
+        <div class="fb-step-n">٢</div>
+        <div>اختار <strong>"فتح في المتصفح"</strong> أو <strong>"Open in Browser"</strong></div>
+      </div>
+      <div class="fb-step">
+        <div class="fb-step-n">٣</div>
+        <div>أو انسخ الرابط دي وافتحه في Chrome أو Safari</div>
+      </div>
+    </div>
+    <div class="fb-url" id="fb-url-txt">hajjelite.github.io/HAJJ-ELITE/</div>
+    <button class="fb-copy-btn" onclick="copyFbUrl()">📋 انسخ الرابط</button>
+    <button class="fb-skip" onclick="document.getElementById('fb-screen').classList.add('hidden')">متابعة على أي حال</button>
+  </div>
+</div>
 
 <!-- Announcement -->
 <div id="ann-bar">
