@@ -13,6 +13,37 @@
 <meta property="og:image" content="https://hajjelite.github.io/HAJJ-ELITE/og-image.jpg">
 <meta property="og:locale" content="ar_AR">
 <meta name="theme-color" content="#0F6B4B">
+<!-- كشف Facebook Browser فوراً قبل أي حاجة تتحمّل -->
+<style>
+  #fb-screen{position:fixed;inset:0;background:linear-gradient(150deg,#083D2A,#051F14);z-index:999999;display:none;align-items:center;justify-content:center;padding:20px;font-family:'Tajawal',Arial,sans-serif;direction:rtl}
+  .fbc{background:#fff;border-radius:22px;padding:32px 24px;max-width:360px;width:100%;text-align:center}
+  .fbc-ic{font-size:52px;margin-bottom:14px}
+  .fbc-t{font-size:19px;font-weight:900;color:#1A2238;margin-bottom:8px}
+  .fbc-s{font-size:13px;color:#5A6480;line-height:1.8;margin-bottom:18px}
+  .fbc-steps{text-align:right;background:#F8F6F1;border-radius:12px;padding:14px 16px;margin-bottom:16px}
+  .fbc-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:8px;font-size:13px;color:#1A2238}
+  .fbc-step:last-child{margin-bottom:0}
+  .fbc-n{width:22px;height:22px;background:#0F6B4B;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;flex-shrink:0}
+  .fbc-url{background:#E6F5EE;border:1px solid #0F6B4B;border-radius:10px;padding:10px 13px;font-size:12px;color:#0F6B4B;font-weight:700;word-break:break-all;margin-bottom:14px;direction:ltr;text-align:left}
+  .fbc-btn{width:100%;padding:14px;background:linear-gradient(135deg,#0F6B4B,#083D2A);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:900;cursor:pointer;font-family:inherit;margin-bottom:8px}
+  .fbc-skip{background:none;border:none;color:#5A6480;font-size:12px;cursor:pointer;font-family:inherit;text-decoration:underline}
+</style>
+<script>
+(function(){
+  var ua = navigator.userAgent || navigator.vendor || '';
+  var isFB = /FBAN|FBAV|FB_IAB|FB4A|FBIOS|Instagram|LinkedInApp|MicroMessenger|Line\/|Twitter/i.test(ua);
+  if(!isFB) return;
+  // أظهر الشاشة فوراً بدون انتظار DOMContentLoaded
+  var style = document.createElement('style');
+  style.textContent = '#fb-screen{display:flex!important}';
+  document.head.appendChild(style);
+  // بعد تحميل الـ DOM حدّث الـ URL
+  document.addEventListener('DOMContentLoaded', function(){
+    var urlEl = document.getElementById('fb-url-txt');
+    if(urlEl) urlEl.textContent = location.href.replace('https://','');
+  });
+})();
+</script>
 <!-- Meta Pixel — ضع رقمك هنا -->
 <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','PIXEL_ID');fbq('track','PageView');</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
@@ -347,28 +378,29 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 <div id="storefront">
 
 <!-- Facebook In-App Browser Screen -->
-<div id="fb-screen" class="hidden">
-  <div class="fb-card">
-    <div class="fb-ic">🌐</div>
-    <div class="fb-title">افتح في المتصفح</div>
-    <div class="fb-sub">الموقع محتاج يتفتح في متصفح Chrome أو Safari عشان يشتغل صح</div>
-    <div class="fb-steps">
-      <div class="fb-step">
-        <div class="fb-step-n">١</div>
-        <div><strong>اضغط على النقاط</strong> (⋮) أو سهم المشاركة في الأعلى</div>
+<div id="fb-screen">
+  <div class="fbc">
+    <div class="fbc-ic">🌐</div>
+    <div class="fbc-t">افتح في المتصفح</div>
+    <div class="fbc-s">عشان الموقع يشتغل صح، لازم تفتحه في Chrome أو Safari</div>
+    <div class="fbc-steps">
+      <div class="fbc-step">
+        <div class="fbc-n">١</div>
+        <div>اضغط على <strong>النقاط الثلاثة ⋮</strong> أو أيقونة <strong>المشاركة</strong> في الأعلى</div>
       </div>
-      <div class="fb-step">
-        <div class="fb-step-n">٢</div>
-        <div>اختار <strong>"فتح في المتصفح"</strong> أو <strong>"Open in Browser"</strong></div>
+      <div class="fbc-step">
+        <div class="fbc-n">٢</div>
+        <div>اختار <strong>"فتح في المتصفح"</strong> أو <strong>Open in Browser</strong></div>
       </div>
-      <div class="fb-step">
-        <div class="fb-step-n">٣</div>
-        <div>أو انسخ الرابط دي وافتحه في Chrome أو Safari</div>
+      <div class="fbc-step">
+        <div class="fbc-n">٣</div>
+        <div>أو <strong>انسخ الرابط</strong> وافتحه في Chrome أو Safari</div>
       </div>
     </div>
-    <div class="fb-url" id="fb-url-txt">hajjelite.github.io/HAJJ-ELITE/</div>
-    <button class="fb-copy-btn" onclick="copyFbUrl()">📋 انسخ الرابط</button>
-    <button class="fb-skip" onclick="document.getElementById('fb-screen').classList.add('hidden')">متابعة على أي حال</button>
+    <div class="fbc-url" id="fb-url-txt">hajjelite.github.io/HAJJ-ELITE/</div>
+    <button class="fbc-btn" onclick="copyFbUrl()">📋 انسخ الرابط</button>
+    <br>
+    <button class="fbc-skip" onclick="document.getElementById('fb-screen').style.display='none'">متابعة على أي حال</button>
   </div>
 </div>
 
@@ -948,7 +980,23 @@ async function checkAuth(){
   }
 }
 
-// ── MOBILE MENU ──────────────────────────
+// ── COPY FB URL ───────────────────────────
+function copyFbUrl(){
+  const url = location.href;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url)
+      .then(()=>toast('تم نسخ الرابط ✓','ok'))
+      .catch(()=>fallbackCopy(url));
+  } else { fallbackCopy(url); }
+}
+function fallbackCopy(text){
+  const el=document.createElement('input');
+  el.value=text; el.style.position='fixed'; el.style.opacity='0';
+  document.body.appendChild(el); el.focus(); el.select();
+  try{ document.execCommand('copy'); toast('تم نسخ الرابط ✓','ok'); }
+  catch(_){ toast('انسخ الرابط يدوياً','info'); }
+  document.body.removeChild(el);
+}
 function toggleMobMenu(){
   const menu=g$('mob-nav'), btn=g$('ham-btn');
   const isOpen=menu.classList.toggle('open');
