@@ -111,6 +111,12 @@ button,input,select,textarea{font-family:var(--f)}
 .fbtn{padding:9px 20px;border-radius:22px;border:2px solid var(--bd);background:transparent;color:var(--tx);font-weight:600;font-size:13px;cursor:pointer;transition:all .2s}
 .fbtn.active,.fbtn:hover{background:var(--g);color:#fff;border-color:var(--g);font-weight:800}
 
+/* ── TRIP TYPE TOGGLE (حج / عمرة) ── */
+.trip-toggle{display:flex;justify-content:center;gap:12px;margin-bottom:26px;flex-wrap:wrap}
+.ttbtn{padding:14px 36px;border-radius:28px;border:2px solid var(--g);background:var(--wh);color:var(--g);font-weight:800;font-size:15px;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.ttbtn.active{background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;box-shadow:0 8px 22px rgba(15,107,75,.28);border-color:transparent}
+.ttbtn:hover{opacity:.9}
+
 /* ── PACKAGE CARDS ── */
 .pkg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:22px}
 .pkg-card{background:var(--wh);border-radius:18px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.07);border:1px solid var(--bd);cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative}
@@ -442,8 +448,12 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
   <div class="container">
     <div class="sec-hdr">
       <div class="sec-lbl">دار السفر تورز — موسم ١٤٤٧ هـ</div>
-      <h2>برامج الحج الفاخرة</h2>
-      <p>الأسعار للفرد رباعي · لا تشمل تذاكر الطيران · مقدم الحجز من ٥,٠٠٠ جنيه</p>
+      <h2 id="pkg-sec-title">برامج الحج الفاخرة</h2>
+      <p id="pkg-sec-sub">الأسعار للفرد رباعي · لا تشمل تذاكر الطيران · مقدم الحجز من ٥,٠٠٠ جنيه</p>
+    </div>
+    <div class="trip-toggle">
+      <button class="ttbtn active" data-t="hajj"  onclick="switchTripType('hajj',this)">🕋 برامج الحج</button>
+      <button class="ttbtn"        data-t="umrah" onclick="switchTripType('umrah',this)">🕌 برامج العمرة</button>
     </div>
     <div class="filters">
       <button class="fbtn active" data-f="all"      onclick="filterPkgs('all',this)">جميع البرامج</button>
@@ -524,7 +534,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 <footer>
   <div class="ft-grid">
     <div><div class="flogo">HAJJ ELITE</div><div class="flogo-s">الحج إيليت — دليلك الموثوق لحج الرفاهية</div><div class="ftxt">منصة متخصصة في برامج الحج الفاخرة من دار السفر تورز لموسم ١٤٤٧ هـ / ٢٠٢٦ م.</div></div>
-    <div><div class="ftit">البرامج</div><a class="flink" onclick="filterPkgs('kidana');sid('pkg-sec')">أبراج كدانة الوادي</a><a class="flink" onclick="filterPkgs('vip');sid('pkg-sec')">فاخر VIP</a><a class="flink" onclick="filterPkgs('classic');sid('pkg-sec')">كلاسيك ١٤ يوم</a><a class="flink" onclick="filterPkgs('economy');sid('pkg-sec')">تحسين</a></div>
+    <div><div class="ftit">البرامج</div><a class="flink" onclick="switchTripType('hajj');filterPkgs('kidana');sid('pkg-sec')">أبراج كدانة الوادي</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('vip');sid('pkg-sec')">فاخر VIP</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('classic');sid('pkg-sec')">كلاسيك ١٤ يوم</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('economy');sid('pkg-sec')">تحسين</a></div>
     <div><div class="ftit">تواصل معنا</div><div class="ftxt" id="f-contact">📧 info@hajjelite.com<br>💬 واتساب: قريباً<br>📍 القاهرة، مصر</div></div>
     <div><div class="ftit">الضمانات</div><div class="ftxt">✅ وفق ضوابط وزارة السياحة المصرية<br>✅ حج مباشر بدون قرعة<br>✅ لا يشترط محرم فوق ٢٥ سنة<br>✅ الطيران غير مشمول بالسعر</div></div>
   </div>
@@ -698,7 +708,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
     <!-- Packages -->
     <div class="adt" id="t-packages">
       <div class="adt-hdr"><h2>📦 إدارة البرامج</h2><button class="btn btn-sm btn-primary" onclick="openPkgForm()">+ إضافة برنامج</button></div>
-      <div class="tbl-wrap tbl-scroll"><table class="adm-tbl" style="min-width:700px"><thead><tr><th>الكود</th><th>الاسم</th><th>التصنيف</th><th>السعر</th><th>الظهور</th><th>مميز</th><th>إجراءات</th></tr></thead><tbody id="pkgs-tb"><tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
+      <div class="tbl-wrap tbl-scroll"><table class="adm-tbl" style="min-width:760px"><thead><tr><th>الكود</th><th>النوع</th><th>الاسم</th><th>التصنيف</th><th>السعر</th><th>الظهور</th><th>مميز</th><th>إجراءات</th></tr></thead><tbody id="pkgs-tb"><tr><td colspan="8" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody></table></div>
     </div>
 
     <!-- Testimonials -->
@@ -756,8 +766,9 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       <input type="hidden" id="pf-id">
       <div class="frow">
         <div class="fg"><label class="flbl">الكود *</label><input class="fi" id="pf-code" placeholder="DS-1"></div>
-        <div class="fg"><label class="flbl">التصنيف *</label><select class="fi" id="pf-cat"><option value="kidana">أبراج كدانة</option><option value="vip">فاخر VIP</option><option value="classic">كلاسيك</option><option value="economy">تحسين</option></select></div>
+        <div class="fg"><label class="flbl">نوع الرحلة *</label><select class="fi" id="pf-trip"><option value="hajj">🕋 حج</option><option value="umrah">🕌 عمرة</option></select></div>
       </div>
+      <div class="fg"><label class="flbl">التصنيف *</label><select class="fi" id="pf-cat"><option value="kidana">أبراج كدانة</option><option value="vip">فاخر VIP</option><option value="classic">كلاسيك</option><option value="economy">تحسين</option></select></div>
       <div class="fg"><label class="flbl">اسم البرنامج *</label><input class="fi" id="pf-name"></div>
       <div class="fg"><label class="flbl">وصف مختصر</label><input class="fi" id="pf-desc"></div>
       <div class="frow">
@@ -852,7 +863,7 @@ let sb;
 try { sb = supabase.createClient(SB_URL, SB_KEY); } catch(e) { console.error('Supabase init:',e); }
 
 // ── STATE ────────────────────────────────
-const S = { pkgs:[], leads:[], tests:[], settings:null, session:null, profile:null, selPkg:null, rt:null };
+const S = { pkgs:[], leads:[], tests:[], settings:null, session:null, profile:null, selPkg:null, rt:null, tripType:'hajj' };
 
 // ── UTILS ────────────────────────────────
 const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -860,6 +871,7 @@ const fmt  = n => Number(n).toLocaleString('ar-EG');
 const sid  = id => document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});
 const g$   = id => document.getElementById(id);
 const catL = c => ({kidana:'أبراج كدانة',vip:'فاخر VIP',classic:'كلاسيك',economy:'تحسين'})[c]||c;
+const tripL = t => ({hajj:'حج',umrah:'عمرة'})[t]||t;
 const sL   = s => ({new:'جديد',contacted:'تم التواصل',booked:'محجوز',cancelled:'ملغي'})[s]||s;
 const sC   = s => ({new:'s-new',contacted:'s-contacted',booked:'s-booked',cancelled:'s-cancelled'})[s]||'s-new';
 
@@ -1236,11 +1248,12 @@ async function exportLeadsExcel(){
 // ── PACKAGES ADMIN ───────────────────────
 async function loadAdmPkgs(){
   if(!sb) return;
-  g$('pkgs-tb').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  g$('pkgs-tb').innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
   const{data}=await sb.from('packages').select('*').order('sort_order');
-  if(!data?.length){g$('pkgs-tb').innerHTML='<tr><td colspan="7" style="text-align:center;color:var(--ts);padding:24px">لا توجد برامج</td></tr>';return;}
+  if(!data?.length){g$('pkgs-tb').innerHTML='<tr><td colspan="8" style="text-align:center;color:var(--ts);padding:24px">لا توجد برامج</td></tr>';return;}
   g$('pkgs-tb').innerHTML=data.map(p=>`<tr>
     <td style="font-weight:800;color:var(--g)">${esc(p.code)}</td>
+    <td><span style="background:${p.trip_type==='umrah'?'var(--al)':'var(--gl)'};color:${p.trip_type==='umrah'?'var(--ad)':'var(--g)'};font-size:11px;padding:3px 9px;border-radius:8px;font-weight:800">${p.trip_type==='umrah'?'🕌 عمرة':'🕋 حج'}</span></td>
     <td style="font-weight:700;min-width:150px">${esc(p.name)}</td>
     <td><span style="background:var(--gl);color:var(--g);font-size:11px;padding:3px 9px;border-radius:8px;font-weight:700">${catL(p.category)}</span></td>
     <td style="font-weight:700">${fmt(p.price)} ج</td>
@@ -1256,6 +1269,7 @@ function openPkgForm(p=null){
   g$('pf-title').textContent=p?'تعديل البرنامج':'إضافة برنامج جديد';
   const v=(id,val)=>{const el=g$(id);if(el)el.value=val??'';};
   v('pf-id',p?.id);v('pf-code',p?.code);g$('pf-cat').value=p?.category||'kidana';
+  g$('pf-trip').value=p?.trip_type||'hajj';
   v('pf-name',p?.name);v('pf-desc',p?.description);v('pf-price',p?.price);v('pf-dep',p?.deposit||10000);
   v('pf-dur',p?.duration_note);v('pf-sort',p?.sort_order||0);v('pf-mak',p?.makkah_hotel);v('pf-mad',p?.madinah_hotel);
   v('pf-meals',p?.meal_plan||'إفطار وعشاء بوفيه مفتوح');v('pf-trans',p?.transport||'قطار الحرمين السريع');
@@ -1267,7 +1281,7 @@ function closePkgForm(e){if(!e||e.target===g$('pkg-form-ov'))g$('pkg-form-ov').c
 async function savePkg(){
   const id=g$('pf-id').value;
   const feats=g$('pf-feats').value.split('\n').map(f=>f.trim()).filter(Boolean);
-  const d={code:g$('pf-code').value.trim(),category:g$('pf-cat').value,name:g$('pf-name').value.trim(),description:g$('pf-desc').value.trim(),price:parseInt(g$('pf-price').value)||0,deposit:parseInt(g$('pf-dep').value)||10000,duration_note:g$('pf-dur').value.trim(),sort_order:parseInt(g$('pf-sort').value)||0,makkah_hotel:g$('pf-mak').value.trim(),madinah_hotel:g$('pf-mad').value.trim(),meal_plan:g$('pf-meals').value.trim(),transport:g$('pf-trans').value.trim(),features:feats,visible:g$('pf-vis').checked,is_featured:g$('pf-feat').checked};
+  const d={code:g$('pf-code').value.trim(),category:g$('pf-cat').value,trip_type:g$('pf-trip').value,name:g$('pf-name').value.trim(),description:g$('pf-desc').value.trim(),price:parseInt(g$('pf-price').value)||0,deposit:parseInt(g$('pf-dep').value)||10000,duration_note:g$('pf-dur').value.trim(),sort_order:parseInt(g$('pf-sort').value)||0,makkah_hotel:g$('pf-mak').value.trim(),madinah_hotel:g$('pf-mad').value.trim(),meal_plan:g$('pf-meals').value.trim(),transport:g$('pf-trans').value.trim(),features:feats,visible:g$('pf-vis').checked,is_featured:g$('pf-feat').checked};
   if(!d.code||!d.name||!d.price){toast('يرجى ملء الحقول المطلوبة *','err');return;}
   const btn=g$('pf-save'); btn.textContent='جاري الحفظ...'; btn.disabled=true;
   const{error}=id?await sb.from('packages').update(d).eq('id',id):await sb.from('packages').insert(d);
@@ -1396,9 +1410,28 @@ function filterPkgs(f,btn){
   else document.querySelectorAll('.fbtn').forEach(b=>{if(b.dataset.f===f)b.classList.add('active');});
   renderPkgs(f);
 }
+// ── التبديل بين برامج الحج وبرامج العمرة ──
+function switchTripType(t,btn){
+  S.tripType=t;
+  document.querySelectorAll('.ttbtn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else document.querySelectorAll('.ttbtn').forEach(b=>{if(b.dataset.t===t)b.classList.add('active');});
+  // زرار "أبراج كدانة" خاص بالحج فقط (مخيمات منى) — نخفيه في وضع العمرة
+  const kidanaBtn=document.querySelector('.fbtn[data-f="kidana"]');
+  if(kidanaBtn) kidanaBtn.classList.toggle('hidden',t==='umrah');
+  // رجّع فلتر التصنيف لـ "جميع البرامج"
+  document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.fbtn[data-f="all"]')?.classList.add('active');
+  const title=g$('pkg-sec-title'), sub=g$('pkg-sec-sub');
+  if(title) title.textContent = t==='hajj' ? 'برامج الحج الفاخرة' : 'برامج العمرة الفاخرة';
+  if(sub)   sub.textContent   = t==='hajj'
+    ? 'الأسعار للفرد رباعي · لا تشمل تذاكر الطيران · مقدم الحجز من ٥,٠٠٠ جنيه'
+    : 'الأسعار للفرد رباعي · لا تشمل تذاكر الطيران · باقات عمرة فاخرة على مدار العام';
+  renderPkgs('all');
+}
 function renderPkgs(f){
   g$('pkg-loading').style.display='none';
-  let list=S.pkgs;
+  let list=S.pkgs.filter(p=>(p.trip_type||'hajj')===S.tripType);
   if(f==='featured') list=list.filter(p=>p.is_featured);
   else if(f&&f!=='all') list=list.filter(p=>p.category===f);
   const grid=g$('pkg-grid'), empty=g$('pkg-empty');
