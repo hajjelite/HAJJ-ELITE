@@ -499,6 +499,8 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
           <input class="fi" id="l-name" type="text" placeholder="الاسم الكامل *">
           <input class="fi" id="l-phone" type="tel" placeholder="رقم الهاتف *">
         </div>
+        <!-- Honeypot: حقل مخفي لصد البوتات — لا تشيله ولا تخليه ظاهر للمستخدم -->
+        <input class="fi" id="l-hp" name="website" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <select class="fi" id="l-gov" style="margin-bottom:12px">
           <option value="">المحافظة</option>
           <option>القاهرة</option><option>الجيزة</option><option>الإسكندرية</option><option>الشرقية</option><option>الدقهلية</option><option>البحيرة</option><option>المنوفية</option><option>القليوبية</option><option>الغربية</option><option>أسيوط</option><option>الفيوم</option><option>بني سويف</option><option>المنيا</option><option>سوهاج</option><option>قنا</option><option>الأقصر</option><option>أسوان</option><option>السويس</option><option>بورسعيد</option><option>دمياط</option><option>كفر الشيخ</option><option>مطروح</option>
@@ -561,6 +563,8 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
         </div>
         <select class="fi" id="pm-pil" style="margin-bottom:10px"><option value="">عدد الحجاج</option><option>١ شخص</option><option>٢ شخصان</option><option>٣ - ٤ أشخاص</option><option>٥ فأكثر</option></select>
         <textarea class="fi" id="pm-msg" rows="2" placeholder="ملاحظات (اختياري)" style="resize:none;margin-bottom:12px"></textarea>
+        <!-- Honeypot: حقل مخفي لصد البوتات — لا تشيله ولا تخليه ظاهر للمستخدم -->
+        <input class="fi" id="pm-hp" name="website" type="text" autocomplete="off" tabindex="-1" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <button class="btn btn-gold" style="width:100%;padding:13px;font-size:14px;border-radius:11px" id="pm-submit" onclick="submitModalLead()">احجز هذا البرنامج ←</button>
         <div style="text-align:center;margin-top:10px"><a id="pm-wa" href="#" target="_blank" style="font-size:12px;color:var(--g);font-weight:700">💬 أو تواصل عبر واتساب</a></div>
       </div>
@@ -1196,6 +1200,39 @@ async function updLead(id,status){
   const l=S.leads.find(x=>x.id===id); if(l) l.status=status;
 }
 
+// ── EXPORT LEADS TO EXCEL ─────────────────
+async function exportLeadsExcel(){
+  if(!sb) return;
+  if(typeof XLSX==='undefined'){toast('مكتبة التصدير غير محمّلة','err');return;}
+  toast('جاري تجهيز الملف...','info',2000);
+  const { data, error } = await sb.from('leads').select('*').order('created_at',{ascending:false});
+  if(error){toast('خطأ في تحميل البيانات','err');return;}
+  if(!data?.length){toast('لا توجد طلبات لتصديرها','err');return;}
+  const rows = data.map(l=>({
+    'رقم الطلب':        l.lead_ref||'',
+    'الاسم':             l.name||'',
+    'الهاتف':            l.phone||'',
+    'واتساب':            l.whatsapp||'',
+    'البريد الإلكتروني': l.email||'',
+    'المحافظة':          l.governorate||'',
+    'الميزانية':         l.budget||'',
+    'عدد الحجاج':        l.pilgrims_count||'',
+    'البرنامج المطلوب':  l.package_interest||'',
+    'الرسالة':           l.message||'',
+    'الحالة':            sL(l.status),
+    'المصدر':            l.source||'',
+    'ملاحظات':           l.notes||'',
+    'تاريخ الإنشاء':     new Date(l.created_at).toLocaleString('ar-EG'),
+  }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  ws['!cols'] = [{wch:16},{wch:20},{wch:15},{wch:15},{wch:24},{wch:14},{wch:16},{wch:12},{wch:22},{wch:30},{wch:12},{wch:14},{wch:24},{wch:20}];
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'الطلبات');
+  const dateStr = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `hajj-elite-leads-${dateStr}.xlsx`);
+  toast('تم تصدير الملف ✓','ok');
+}
+
 // ── PACKAGES ADMIN ───────────────────────
 async function loadAdmPkgs(){
   if(!sb) return;
@@ -1441,6 +1478,8 @@ function closePkgModal(e){
 async function submitModalLead(){
   const name=g$('pm-n').value.trim(), phone=g$('pm-p').value.trim();
   if(!name||!phone){toast('يرجى إدخال الاسم ورقم الهاتف','err');return;}
+  // Honeypot check — لو الحقل المخفي اتملى، ده بوت، منكملش
+  if((g$('pm-hp')?.value||'').trim()!==''){toast('حدث خطأ، حاول مرة أخرى','err');return;}
   const btn=g$('pm-submit'); btn.textContent='جاري الإرسال...'; btn.disabled=true;
   const p=S.selPkg;
   if(sb){
@@ -1449,8 +1488,12 @@ async function submitModalLead(){
       pilgrims_count:g$('pm-pil').value||null,
       message:(g$('pm-msg').value||'').replace(/[<>]/g,'').trim()||null,
       package_interest:p?`${p.code} — ${p.name}`:null,source:'package_modal',
+      hp_website:g$('pm-hp')?.value||'',
     });
-    if(error){toast('خطأ في الإرسال. حاول مرة أخرى.','err');btn.textContent='احجز هذا البرنامج ←';btn.disabled=false;return;}
+    if(error){
+      const msg=/row-level security/i.test(error.message||'')?'تم رصد نشاط غير معتاد. حاول لاحقًا أو تواصل معنا واتساب.':'خطأ في الإرسال. حاول مرة أخرى.';
+      toast(msg,'err');btn.textContent='احجز هذا البرنامج ←';btn.disabled=false;return;
+    }
   }
   toast('✅ تم إرسال طلبك! سنتواصل معك قريباً','ok',5000);
   track('Lead',{value:p?.price||0,currency:'EGP',content_name:p?.name||''});
@@ -1462,13 +1505,19 @@ async function submitModalLead(){
 async function submitLead(){
   const name=g$('l-name').value.trim(), phone=g$('l-phone').value.trim();
   if(!name||!phone){toast('يرجى إدخال الاسم ورقم الهاتف على الأقل','err');return;}
+  // Honeypot check — لو الحقل المخفي اتملى، ده بوت، منكملش
+  if((g$('l-hp')?.value||'').trim()!==''){toast('حدث خطأ، حاول مرة أخرى','err');return;}
   if(sb){
     const{error}=await sb.from('leads').insert({
       name:name.replace(/[<>'"]/g,''),phone:phone.replace(/[^0-9+\-\s]/g,''),
       governorate:g$('l-gov').value||null,budget:g$('l-budget').value||null,
       pilgrims_count:g$('l-pil').value||null,source:'homepage_form',
+      hp_website:g$('l-hp')?.value||'',
     });
-    if(error){toast('خطأ في الإرسال. حاول مرة أخرى.','err');return;}
+    if(error){
+      const msg=/row-level security/i.test(error.message||'')?'تم رصد نشاط غير معتاد. حاول لاحقًا أو تواصل معنا واتساب.':'خطأ في الإرسال. حاول مرة أخرى.';
+      toast(msg,'err');return;
+    }
   }
   track('Lead',{currency:'EGP'});
   g$('lead-wrap').innerHTML=`<div class="lead-ok"><div class="lok-ic">✅</div><div class="lok-t">تم استلام طلبك بنجاح!</div><p class="lok-s">سيتواصل معك فريقنا على رقم <strong style="color:#fff">${esc(phone)}</strong><br>خلال ٢٤ ساعة. تقبل الله منا ومنكم 🤲</p></div>`;
