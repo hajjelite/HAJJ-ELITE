@@ -216,6 +216,29 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 .modal-hdr{padding:20px 22px;border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
 .modal-hdr h3{font-size:16px;font-weight:900}
 .mclose{background:none;border:none;font-size:22px;cursor:pointer;color:var(--ts);padding:2px 8px}
+
+/* ── GUIDES DRAWER (دليلك الكامل) ── */
+.ham-btn-nav{display:flex;flex-direction:column;gap:5px;justify-content:center;align-items:center;width:38px;height:38px;background:var(--gl);border:none;border-radius:10px;cursor:pointer;padding:0;flex-shrink:0}
+.ham-btn-nav .ham-l{width:20px;height:2px;background:var(--g);border-radius:2px;transition:background .15s}
+.ham-btn-nav:hover{background:var(--g)}
+.ham-btn-nav:hover .ham-l{background:#fff}
+.overlay-drawer{position:fixed;inset:0;background:rgba(15,20,35,.55);z-index:1000;opacity:0;pointer-events:none;transition:opacity .3s}
+.overlay-drawer.open{opacity:1;pointer-events:auto}
+.guides-drawer{position:fixed;top:0;right:0;height:100dvh;width:min(430px,92vw);background:var(--wh);box-shadow:-10px 0 34px rgba(0,0,0,.2);transform:translateX(100%);transition:transform .38s cubic-bezier(.16,1,.3,1);display:flex;flex-direction:column;z-index:1001}
+.overlay-drawer.open .guides-drawer{transform:translateX(0)}
+.gd-hdr{display:flex;justify-content:space-between;align-items:flex-start;padding:22px 20px;background:linear-gradient(135deg,var(--g),var(--gd));color:#fff;flex-shrink:0}
+.gd-hdr h3{margin:0;font-size:18px;font-weight:800}
+.gd-sub{font-size:12.5px;opacity:.88;margin-top:3px}
+.gd-hdr .mclose{color:#fff;font-size:26px}
+.gd-body{flex:1;overflow-y:auto;padding:18px}
+.gcard{background:var(--bg);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.gcard .gic{font-size:30px;flex-shrink:0;line-height:1}
+.gcard .gtxt{flex:1;min-width:0}
+.gcard .gtitle{font-weight:800;font-size:14.5px;color:var(--tx);margin-bottom:4px}
+.gcard .gdesc{font-size:12.5px;color:var(--ts);line-height:1.6;margin-bottom:8px}
+.gcard .gmeta{font-size:11px;color:var(--ts);margin-bottom:10px}
+.gcard .gdl{display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;border:none;padding:9px 18px;border-radius:20px;font-size:12.5px;font-weight:700;cursor:pointer;text-decoration:none}
+.gcard .gdl:hover{background:var(--gd)}
 .modal-body{padding:22px}
 .modal-ftr{padding:14px 22px;border-top:1px solid var(--bd);display:flex;justify-content:flex-end;gap:10px}
 
@@ -412,6 +435,9 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
         <button class="nl" style="font-size:11px;padding:5px 8px;color:var(--red)" onclick="userLogout()">خروج</button>
       </div>
       <button class="nav-cta" onclick="sid('lead-sec')">← استشارة مجانية</button>
+      <button id="guides-btn" class="ham-btn-nav" onclick="openGuidesDrawer()" aria-label="دليلك الكامل في مكة والمدينة" title="دليلك الكامل في مكة والمدينة">
+        <span class="ham-l"></span><span class="ham-l"></span><span class="ham-l"></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -668,6 +694,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       <button class="adl" onclick="aTab('packages',this)">📦 البرامج</button>
       <button class="adl" onclick="aTab('testimonials',this)">⭐ الآراء</button>
       <button class="adl" onclick="aTab('faqs',this)">❓ الأسئلة الشائعة</button>
+      <button class="adl" onclick="aTab('guides',this)">📚 الأدلة</button>
       <button class="adl" onclick="aTab('settings',this)">🔧 الإعدادات</button>
     </div>
     <div class="adm-right">
@@ -731,6 +758,23 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       </div>
       <div style="margin-top:12px;padding:12px 16px;background:var(--al);border-radius:10px;font-size:12px;color:var(--ad)">
         💡 الأسئلة هتظهر في الموقع تلقائياً حسب الترتيب. الأرقام الأصغر تظهر أول.
+      </div>
+    </div>
+
+    <!-- Guides (دليلك الكامل) -->
+    <div class="adt" id="t-guides">
+      <div class="adt-hdr">
+        <h2>📚 إدارة الأدلة (PDF)</h2>
+        <button class="btn btn-sm btn-primary" onclick="openGuideForm()">+ إضافة دليل جديد</button>
+      </div>
+      <div class="tbl-wrap tbl-scroll">
+        <table class="adm-tbl" style="min-width:640px">
+          <thead><tr><th>الأيقونة</th><th>العنوان</th><th>حجم الملف</th><th>الترتيب</th><th>الظهور</th><th>إجراءات</th></tr></thead>
+          <tbody id="guides-tb"><tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr></tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;padding:12px 16px;background:var(--al);border-radius:10px;font-size:12px;color:var(--ad)">
+        💡 الأدلة هتظهر للعميل من زرار ☰ في أعلى الموقع باسم "دليلك الكامل في مكة والمدينة". الملفات PDF فقط وحتى 20 ميجابايت.
       </div>
     </div>
 
@@ -819,6 +863,36 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
   </div>
 </div>
 
+<!-- Guide Form Modal -->
+<div class="overlay" id="guide-form-ov" onclick="closeGuideForm(event)">
+  <div class="modal" style="max-width:520px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3 id="gf-title">إضافة دليل جديد</h3><button class="mclose" onclick="closeGuideForm()">×</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="gf-id">
+      <input type="hidden" id="gf-file-url">
+      <input type="hidden" id="gf-file-path">
+      <input type="hidden" id="gf-file-name">
+      <input type="hidden" id="gf-file-size">
+      <div class="fg"><label class="flbl">العنوان *</label><input class="fi" id="gf-title-in" placeholder="خطوات ودليل إتمام الحج كامل"></div>
+      <div class="fg"><label class="flbl">وصف مختصر</label><input class="fi" id="gf-desc" placeholder="دليل شامل لكل خطوات أداء المناسك خطوة بخطوة"></div>
+      <div class="frow">
+        <div class="fg"><label class="flbl">أيقونة (إيموجي)</label><input class="fi" id="gf-icon" placeholder="📄" value="📄"></div>
+        <div class="fg"><label class="flbl">الترتيب (الأصغر يظهر أول)</label><input class="fi" id="gf-sort" type="number" value="0" min="0"></div>
+      </div>
+      <div class="fg">
+        <label class="flbl">ملف PDF * <span style="font-weight:400;color:var(--ts)">(حتى 20 ميجابايت)</span></label>
+        <input class="fi" id="gf-file" type="file" accept="application/pdf">
+        <div id="gf-file-status" style="font-size:12px;color:var(--ts);margin-top:6px"></div>
+      </div>
+      <div class="fg" style="display:flex;align-items:center"><label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px"><input type="checkbox" id="gf-vis" checked> ظاهر للعملاء</label></div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-ghost" onclick="closeGuideForm()">إلغاء</button>
+      <button class="btn btn-primary" id="gf-save-btn" onclick="saveGuide()">💾 حفظ الدليل</button>
+    </div>
+  </div>
+</div>
+
 <!-- Testimonial Form Modal -->
 <div class="overlay" id="test-form-ov" onclick="closeTestForm(event)">
   <div class="modal" style="max-width:460px" onclick="event.stopPropagation()">
@@ -839,6 +913,22 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
     <div class="modal-ftr">
       <button class="btn btn-ghost" onclick="closeTestForm()">إلغاء</button>
       <button class="btn btn-primary" onclick="saveTest()">💾 حفظ</button>
+    </div>
+  </div>
+</div>
+
+<!-- Guides Drawer (دليلك الكامل في مكة والمدينة) -->
+<div class="overlay-drawer" id="guides-ov" onclick="closeGuidesDrawer(event)">
+  <div class="guides-drawer" onclick="event.stopPropagation()">
+    <div class="gd-hdr">
+      <div>
+        <h3>📚 دليلك الكامل</h3>
+        <div class="gd-sub">في مكة المكرمة والمدينة المنورة</div>
+      </div>
+      <button class="mclose" onclick="closeGuidesDrawer()">×</button>
+    </div>
+    <div class="gd-body" id="gd-body">
+      <div style="text-align:center;padding:40px;color:var(--ts)">⏳ جاري التحميل...</div>
     </div>
   </div>
 </div>
@@ -864,7 +954,7 @@ let sb;
 try { sb = supabase.createClient(SB_URL, SB_KEY); } catch(e) { console.error('Supabase init:',e); }
 
 // ── STATE ────────────────────────────────
-const S = { pkgs:[], leads:[], tests:[], settings:null, session:null, profile:null, selPkg:null, rt:null, tripType:'hajj' };
+const S = { pkgs:[], leads:[], tests:[], guides:[], settings:null, session:null, profile:null, selPkg:null, rt:null, tripType:'hajj' };
 
 // ── UTILS ────────────────────────────────
 const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -1151,7 +1241,7 @@ function aTab(name,btn){
   g$('t-'+name).classList.add('active');
   document.querySelectorAll('.adl').forEach(b=>b.classList.remove('active'));
   if(btn) btn.classList.add('active');
-  ({leads:loadLeads,packages:loadAdmPkgs,testimonials:loadAdmTests,faqs:loadAdmFaqs,settings:loadSettingsForm,dashboard:loadDashboard})[name]?.();
+  ({leads:loadLeads,packages:loadAdmPkgs,testimonials:loadAdmTests,faqs:loadAdmFaqs,guides:loadAdmGuides,settings:loadSettingsForm,dashboard:loadDashboard})[name]?.();
 }
 
 // ── DASHBOARD ────────────────────────────
@@ -1648,6 +1738,142 @@ async function deleteFaq(id){
   const{error}=await sb.from('faqs').delete().eq('id',id);
   if(error){toast('خطأ في الحذف','err');return;}
   toast('تم الحذف','ok'); loadAdmFaqs(); loadFaqFromDB();
+}
+
+// ═══════════════════════════════════════════
+// دليلك الكامل في مكة والمدينة (GUIDES)
+// ═══════════════════════════════════════════
+function fmtFileSize(bytes){
+  if(!bytes) return '';
+  if(bytes<1024*1024) return Math.round(bytes/1024)+' كيلوبايت';
+  return (bytes/(1024*1024)).toFixed(1)+' ميجابايت';
+}
+
+// ── الواجهة العامة (Drawer) ──
+function openGuidesDrawer(){
+  g$('guides-ov').classList.add('open');
+  document.body.style.overflow='hidden';
+  loadGuidesDrawer();
+}
+function closeGuidesDrawer(e){
+  if(e && e.target!==g$('guides-ov')) return;
+  g$('guides-ov').classList.remove('open');
+  document.body.style.overflow='';
+}
+async function loadGuidesDrawer(){
+  const body=g$('gd-body');
+  body.innerHTML='<div style="text-align:center;padding:40px;color:var(--ts)">⏳ جاري التحميل...</div>';
+  if(!sb){body.innerHTML='<div style="text-align:center;padding:40px;color:var(--ts)">تعذّر الاتصال بالخادم</div>';return;}
+  const{data,error}=await sb.from('guides').select('*').eq('visible',true).order('sort_order');
+  if(error||!data?.length){
+    body.innerHTML='<div style="text-align:center;padding:40px;color:var(--ts)">📭 لا توجد أدلة متاحة حاليًا<br><span style="font-size:12px">تابعنا قريبًا هنضيف أدلة مفيدة لرحلتك</span></div>';
+    return;
+  }
+  body.innerHTML=data.map(gd=>`
+    <div class="gcard">
+      <div class="gic">${esc(gd.icon||'📄')}</div>
+      <div class="gtxt">
+        <div class="gtitle">${esc(gd.title)}</div>
+        ${gd.description?`<div class="gdesc">${esc(gd.description)}</div>`:''}
+        ${gd.file_size?`<div class="gmeta">📎 ${fmtFileSize(gd.file_size)}</div>`:''}
+        <a class="gdl" href="${esc(gd.file_url)}" target="_blank" rel="noopener">⬇️ تحميل PDF</a>
+      </div>
+    </div>`).join('');
+}
+
+// ── لوحة التحكم (Admin) ──
+async function loadAdmGuides(){
+  if(!sb) return;
+  g$('guides-tb').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">جاري التحميل...</td></tr>';
+  const{data}=await sb.from('guides').select('*').order('sort_order');
+  S.guides=data||[];
+  if(!S.guides.length){g$('guides-tb').innerHTML='<tr><td colspan="6" style="text-align:center;color:var(--ts);padding:24px">لا توجد أدلة — اضغط "+ إضافة دليل جديد"</td></tr>';return;}
+  g$('guides-tb').innerHTML=S.guides.map(gd=>`<tr>
+    <td style="font-size:20px;text-align:center">${esc(gd.icon||'📄')}</td>
+    <td style="font-weight:700;min-width:170px">${esc(gd.title)}</td>
+    <td style="font-size:12px;color:var(--ts)">${fmtFileSize(gd.file_size)||'-'}</td>
+    <td style="text-align:center;font-weight:700;color:var(--g)">${gd.sort_order}</td>
+    <td style="color:${gd.visible?'var(--g)':'var(--red)'};font-weight:700">${gd.visible?'✅ ظاهر':'🔴 مخفي'}</td>
+    <td style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-outline" onclick='openGuideForm(${JSON.stringify(gd)})'>تعديل</button>
+      <button class="btn btn-sm" style="background:${gd.visible?'var(--red)':'var(--g)'};color:#fff" onclick="toggleGuideVis('${gd.id}',${gd.visible})">${gd.visible?'إخفاء':'إظهار'}</button>
+      <button class="btn btn-sm btn-danger" onclick="deleteGuide('${gd.id}')">حذف</button>
+    </td>
+  </tr>`).join('');
+}
+function openGuideForm(g=null){
+  g$('gf-title').textContent=g?'تعديل الدليل':'إضافة دليل جديد';
+  g$('gf-id').value=g?.id||'';
+  g$('gf-title-in').value=g?.title||'';
+  g$('gf-desc').value=g?.description||'';
+  g$('gf-icon').value=g?.icon||'📄';
+  g$('gf-sort').value=g?.sort_order??0;
+  g$('gf-vis').checked=g?!!g.visible:true;
+  g$('gf-file-url').value=g?.file_url||'';
+  g$('gf-file-path').value=g?.file_path||'';
+  g$('gf-file-name').value=g?.file_name||'';
+  g$('gf-file-size').value=g?.file_size||'';
+  g$('gf-file').value='';
+  g$('gf-file-status').textContent = g?.file_name ? `📎 الملف الحالي: ${g.file_name} — اختر ملف جديد لاستبداله` : '';
+  g$('guide-form-ov').classList.add('open');
+  setTimeout(()=>g$('gf-title-in').focus(),200);
+}
+function closeGuideForm(e){
+  if(!e||e.target===g$('guide-form-ov')) g$('guide-form-ov').classList.remove('open');
+}
+async function saveGuide(){
+  const title=g$('gf-title-in').value.trim();
+  if(!title){toast('عنوان الدليل مطلوب *','err');return;}
+  const file=g$('gf-file').files[0];
+  let fileUrl=g$('gf-file-url').value, filePath=g$('gf-file-path').value,
+      fileName=g$('gf-file-name').value, fileSize=parseInt(g$('gf-file-size').value)||null;
+
+  if(!file && !fileUrl){toast('يجب رفع ملف PDF *','err');return;}
+
+  const btn=g$('gf-save-btn'); const oldTxt=btn.textContent;
+  btn.disabled=true; btn.textContent='جاري الحفظ...';
+
+  if(file){
+    if(file.type!=='application/pdf'){toast('الملف لازم يكون PDF فقط','err');btn.disabled=false;btn.textContent=oldTxt;return;}
+    if(file.size>20*1024*1024){toast('حجم الملف أكبر من 20 ميجابايت','err');btn.disabled=false;btn.textContent=oldTxt;return;}
+    const newPath=`${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'_')}`;
+    const{error:upErr}=await sb.storage.from('guides').upload(newPath,file,{cacheControl:'3600',upsert:false});
+    if(upErr){toast('خطأ في رفع الملف: '+upErr.message,'err');btn.disabled=false;btn.textContent=oldTxt;return;}
+    // لو بيستبدل ملف قديم، امسح القديم من التخزين
+    if(filePath && filePath!==newPath) await sb.storage.from('guides').remove([filePath]);
+    const{data:urlData}=sb.storage.from('guides').getPublicUrl(newPath);
+    fileUrl=urlData.publicUrl; filePath=newPath; fileName=file.name; fileSize=file.size;
+  }
+
+  const id=g$('gf-id').value;
+  const d={
+    title, description:g$('gf-desc').value.trim(),
+    icon:g$('gf-icon').value.trim()||'📄',
+    sort_order:parseInt(g$('gf-sort').value)||0,
+    visible:g$('gf-vis').checked,
+    file_url:fileUrl, file_path:filePath, file_name:fileName, file_size:fileSize,
+  };
+  const{error}=id ? await sb.from('guides').update(d).eq('id',id) : await sb.from('guides').insert(d);
+  btn.disabled=false; btn.textContent=oldTxt;
+  if(error){toast('خطأ: '+error.message,'err');return;}
+  toast('تم حفظ الدليل ✓','ok');
+  g$('guide-form-ov').classList.remove('open');
+  loadAdmGuides();
+}
+async function toggleGuideVis(id,vis){
+  const{error}=await sb.from('guides').update({visible:!vis}).eq('id',id);
+  if(error){toast('خطأ','err');return;}
+  toast(vis?'تم الإخفاء':'تم الإظهار','ok');
+  loadAdmGuides();
+}
+async function deleteGuide(id){
+  if(!confirm('هل تريد حذف هذا الدليل نهائياً؟ الملف هيتشال من التخزين برضو.')) return;
+  const g=S.guides.find(x=>x.id===id);
+  const{error}=await sb.from('guides').delete().eq('id',id);
+  if(error){toast('خطأ في الحذف','err');return;}
+  if(g?.file_path) await sb.storage.from('guides').remove([g.file_path]);
+  toast('تم الحذف','ok');
+  loadAdmGuides();
 }
 
 // ── FAQ STOREFRONT (من Supabase) ─────────
