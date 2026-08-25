@@ -148,6 +148,16 @@ button,input,select,textarea{font-family:var(--f)}
 .prv{font-weight:700;color:var(--tx);text-align:left;font-size:11px}
 .pfeat-wrap{display:flex;flex-wrap:wrap;gap:5px;margin:12px 0}
 .pfeat{background:var(--gl);color:var(--g);font-size:10px;padding:3px 8px;border-radius:7px;font-weight:700}
+
+/* ── PACKAGE IMAGES (معرض صور البرنامج) ── */
+.pcover{width:100%;height:160px;overflow:hidden;flex-shrink:0}
+.pcover img{width:100%;height:100%;object-fit:cover;display:block}
+.pm-gallery{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:14px;scroll-snap-type:x proximity}
+.pm-gallery img{width:120px;height:90px;object-fit:cover;border-radius:10px;flex-shrink:0;cursor:pointer;scroll-snap-align:start;border:1px solid var(--bd)}
+.lb-box{position:relative;max-width:92vw;max-height:90vh}
+.lb-box img{max-width:92vw;max-height:76vh;border-radius:12px;display:block;margin:0 auto;object-fit:contain}
+.pi-row{display:flex;gap:10px;align-items:center;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:8px;margin-bottom:8px}
+.pi-row img{width:60px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0}
 .pfeat-more{background:var(--bg);color:var(--ts)}
 .pcta{width:100%;padding:12px;border-radius:10px;border:none;font-weight:900;font-size:14px;cursor:pointer;margin-top:14px;transition:opacity .2s}
 .pcta:hover{opacity:.88}
@@ -588,6 +598,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       <div style="font-size:11px;color:rgba(255,255,255,.52);margin-top:2px" id="pm-dep"></div>
     </div>
     <div class="modal-body">
+      <div id="pm-gallery"></div>
       <div id="pm-details"></div>
       <div id="pm-feats"></div>
       <div style="background:var(--gl);border-radius:14px;padding:20px;margin-top:16px">
@@ -843,6 +854,26 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
   </div>
 </div>
 
+<!-- Package Images Modal -->
+<div class="overlay" id="pkg-img-ov" onclick="closePkgImages(event)">
+  <div class="modal" style="max-width:640px" onclick="event.stopPropagation()">
+    <div class="modal-hdr"><h3 id="pi-title">صور البرنامج</h3><button class="mclose" onclick="closePkgImages()">×</button></div>
+    <div class="modal-body" style="max-height:70dvh;overflow-y:auto">
+      <div class="fg">
+        <label class="flbl">إضافة صورة جديدة <span style="font-weight:400;color:var(--ts)">(JPG / PNG / WebP، حتى 8 ميجابايت)</span></label>
+        <input class="fi" id="pi-file" type="file" accept="image/jpeg,image/png,image/webp">
+        <input class="fi" id="pi-caption" placeholder="وصف الصورة (اختياري) — مثال: غرفة مزدوجة فندق سويس أوتيل" style="margin-top:8px">
+        <button class="btn btn-sm btn-primary" style="margin-top:8px" id="pi-add-btn" onclick="addPkgImage()">+ رفع الصورة</button>
+      </div>
+      <div id="pi-count-note" style="font-size:12px;color:var(--ts);margin:14px 0 8px"></div>
+      <div id="pi-grid"></div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn btn-primary" onclick="closePkgImages()">تم</button>
+    </div>
+  </div>
+</div>
+
 <!-- FAQ Form Modal -->
 <div class="overlay" id="faq-form-ov" onclick="closeFaqForm(event)">
   <div class="modal" style="max-width:560px" onclick="event.stopPropagation()">
@@ -935,6 +966,20 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 
 <!-- Toast -->
 <div id="toast"></div>
+
+<!-- Lightbox (عرض الصورة بحجم كبير) -->
+<div class="overlay" id="lightbox-ov" onclick="closeLightbox(event)" style="z-index:1200;background:rgba(10,12,20,.92)">
+  <div class="lb-box" onclick="event.stopPropagation()">
+    <button class="mclose" onclick="closeLightbox()" style="position:absolute;top:-42px;left:0;color:#fff;background:rgba(255,255,255,.15);border-radius:50%;width:34px;height:34px">×</button>
+    <img id="lb-img" src="" alt="">
+    <div id="lb-caption" style="color:#fff;text-align:center;margin-top:12px;font-size:13px;opacity:.9"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px">
+      <button class="btn btn-sm" style="background:rgba(255,255,255,.15);color:#fff" onclick="lbNav(-1)">→ السابقة</button>
+      <span id="lb-counter" style="color:rgba(255,255,255,.65);font-size:12px"></span>
+      <button class="btn btn-sm" style="background:rgba(255,255,255,.15);color:#fff" onclick="lbNav(1)">التالية ←</button>
+    </div>
+  </div>
+</div>
 <!-- New lead notification -->
 <div id="ln"><div class="ln-ic">🔔</div><div><div class="ln-t">طلب جديد وصل!</div><div class="ln-s" id="ln-s">عميل جديد</div></div><button class="ln-x" onclick="document.getElementById('ln').classList.remove('show')">×</button></div>
 
@@ -954,7 +999,7 @@ let sb;
 try { sb = supabase.createClient(SB_URL, SB_KEY); } catch(e) { console.error('Supabase init:',e); }
 
 // ── STATE ────────────────────────────────
-const S = { pkgs:[], leads:[], tests:[], guides:[], settings:null, session:null, profile:null, selPkg:null, rt:null, tripType:'hajj' };
+const S = { pkgs:[], leads:[], tests:[], guides:[], pkgImages:[], settings:null, session:null, profile:null, selPkg:null, curPkgId:null, rt:null, tripType:'hajj' };
 
 // ── UTILS ────────────────────────────────
 const esc  = s => String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -1353,6 +1398,7 @@ async function loadAdmPkgs(){
     <td>${p.is_featured?'⭐':'-'}</td>
     <td style="display:flex;gap:6px;flex-wrap:wrap">
       <button class="btn btn-sm btn-outline" onclick='openPkgForm(${JSON.stringify(p)})'>تعديل</button>
+      <button class="btn btn-sm btn-outline" onclick='openPkgImages(${JSON.stringify(p.id)},${JSON.stringify(p.name)})'>🖼️ الصور</button>
       <button class="btn btn-sm" style="background:${p.visible?'var(--red)':'var(--g)'};color:#fff" onclick="togglePkg('${p.id}',${p.visible})">${p.visible?'إخفاء':'إظهار'}</button>
     </td>
   </tr>`).join('');
@@ -1537,10 +1583,13 @@ function renderPkgs(f){
 function pkgCard(p){
   const dark=p.category==='kidana'||(p.is_featured&&p.category==='vip');
   const feats=Array.isArray(p.features)?p.features:[];
+  const imgs=Array.isArray(p.images)?p.images:[];
+  const cover=imgs[0]?.url;
   const badge=p.category==='kidana'?'الأفخم':p.is_featured?'الأفضل':null;
   return `
   <div class="pkg-card${p.is_featured?' feat':''}" onclick="openPkgModal('${p.id}')">
     ${badge?`<div class="pbadge ${p.category==='kidana'?'pb-gold':'pb-green'}">${badge}</div>`:''}
+    ${cover?`<div class="pcover"><img src="${esc(cover)}" alt="${esc(p.name)}" loading="lazy"></div>`:''}
     <div class="phead${dark?' phead-dk':''}">
       <div class="pcode ${dark?'pc-lgt':'pc-drk'}">كود: ${esc(p.code)}</div>
       <div class="pname ${dark?'pn-lgt':'pn-drk'}">${esc(p.name)}</div>
@@ -1578,6 +1627,10 @@ function openPkgModal(id){
   const p=S.pkgs.find(x=>x.id===id); if(!p) return;
   S.selPkg=p;
   const feats=Array.isArray(p.features)?p.features:[];
+  const imgs=Array.isArray(p.images)?p.images:[];
+  g$('pm-gallery').innerHTML = imgs.length ? `<div class="pm-gallery">${
+    imgs.map((im,i)=>`<img src="${esc(im.url)}" alt="${esc(im.caption||p.name)}" loading="lazy" onclick='openLightbox(${JSON.stringify(imgs).replace(/'/g,"&#39;")},${i})'>`).join('')
+  }</div>` : '';
   g$('pm-code').textContent='كود: '+p.code;
   g$('pm-name').textContent=p.name;
   g$('pm-sub').textContent=p.description||'';
@@ -1874,6 +1927,118 @@ async function deleteGuide(id){
   if(g?.file_path) await sb.storage.from('guides').remove([g.file_path]);
   toast('تم الحذف','ok');
   loadAdmGuides();
+}
+
+// ═══════════════════════════════════════════
+// معرض صور البرنامج (PACKAGE IMAGES)
+// ═══════════════════════════════════════════
+// ── Lightbox (عرض للعميل) ──
+let LB={imgs:[],idx:0};
+function openLightbox(imgs,idx){
+  LB.imgs=Array.isArray(imgs)?imgs:[]; LB.idx=idx||0;
+  if(!LB.imgs.length) return;
+  renderLightbox();
+  g$('lightbox-ov').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLightbox(e){
+  if(e && e.target!==g$('lightbox-ov')) return;
+  g$('lightbox-ov').classList.remove('open');
+  document.body.style.overflow='';
+}
+function renderLightbox(){
+  const im=LB.imgs[LB.idx]; if(!im) return;
+  g$('lb-img').src=im.url; g$('lb-img').alt=im.caption||'';
+  g$('lb-caption').textContent=im.caption||'';
+  g$('lb-counter').textContent=`${LB.idx+1} / ${LB.imgs.length}`;
+}
+function lbNav(dir){
+  if(!LB.imgs.length) return;
+  LB.idx=(LB.idx+dir+LB.imgs.length)%LB.imgs.length;
+  renderLightbox();
+}
+
+// ── لوحة التحكم: إدارة صور برنامج معيّن ──
+function openPkgImages(pkgId,pkgName){
+  S.curPkgId=pkgId;
+  g$('pi-title').textContent='صور برنامج: '+pkgName;
+  g$('pi-file').value=''; g$('pi-caption').value='';
+  g$('pkg-img-ov').classList.add('open');
+  loadPkgImages();
+}
+function closePkgImages(e){
+  if(!e||e.target===g$('pkg-img-ov')){g$('pkg-img-ov').classList.remove('open');S.curPkgId=null;}
+}
+async function loadPkgImages(){
+  if(!sb||!S.curPkgId) return;
+  g$('pi-grid').innerHTML='<div style="text-align:center;padding:20px;color:var(--ts)">⏳ جاري التحميل...</div>';
+  const{data}=await sb.from('package_images').select('*').eq('package_id',S.curPkgId).order('sort_order');
+  S.pkgImages=data||[];
+  renderPkgImagesGrid();
+}
+function renderPkgImagesGrid(){
+  const n=S.pkgImages.length;
+  g$('pi-count-note').textContent = `📷 عدد الصور الحالي: ${n} / 10 صور كحد أقصى`;
+  g$('pi-add-btn').disabled = n>=10;
+  if(!n){g$('pi-grid').innerHTML='<div style="text-align:center;padding:20px;color:var(--ts)">لا توجد صور مضافة بعد</div>';return;}
+  g$('pi-grid').innerHTML=S.pkgImages.map((im,i)=>`
+    <div class="pi-row">
+      <img src="${esc(im.image_url)}" alt="">
+      <input class="fi" style="flex:1;font-size:12px" value="${esc(im.caption||'')}" placeholder="وصف الصورة" onchange="updateImgCaption('${im.id}',this.value)">
+      <button class="btn btn-sm btn-outline" ${i===0?'disabled':''} onclick="moveImg('${im.id}',-1)">↑</button>
+      <button class="btn btn-sm btn-outline" ${i===S.pkgImages.length-1?'disabled':''} onclick="moveImg('${im.id}',1)">↓</button>
+      <button class="btn btn-sm btn-danger" onclick="deletePkgImage('${im.id}')">حذف</button>
+    </div>`).join('');
+}
+async function addPkgImage(){
+  const file=g$('pi-file').files[0];
+  if(!file){toast('اختر صورة أولاً','err');return;}
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){toast('الصورة لازم تكون JPG أو PNG أو WebP','err');return;}
+  if(file.size>8*1024*1024){toast('حجم الصورة أكبر من 8 ميجابايت','err');return;}
+  if(S.pkgImages.length>=10){toast('الحد الأقصى 10 صور لكل برنامج','err');return;}
+  const btn=g$('pi-add-btn'); const oldTxt=btn.textContent;
+  btn.disabled=true; btn.textContent='جاري الرفع...';
+  const path=`${S.curPkgId}/${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g,'_')}`;
+  const{error:upErr}=await sb.storage.from('package-images').upload(path,file,{cacheControl:'3600',upsert:false});
+  if(upErr){toast('خطأ في رفع الصورة: '+upErr.message,'err');btn.disabled=false;btn.textContent=oldTxt;return;}
+  const{data:urlData}=sb.storage.from('package-images').getPublicUrl(path);
+  const nextSort=S.pkgImages.length?Math.max(...S.pkgImages.map(x=>x.sort_order||0))+1:0;
+  const{error}=await sb.from('package_images').insert({
+    package_id:S.curPkgId, image_url:urlData.publicUrl, image_path:path,
+    caption:g$('pi-caption').value.trim()||null, sort_order:nextSort,
+  });
+  btn.disabled=false; btn.textContent=oldTxt;
+  if(error){toast('خطأ في الحفظ: '+error.message,'err');return;}
+  toast('تم رفع الصورة ✓','ok');
+  g$('pi-file').value=''; g$('pi-caption').value='';
+  loadPkgImages();
+}
+async function updateImgCaption(id,caption){
+  const{error}=await sb.from('package_images').update({caption:caption.trim()||null}).eq('id',id);
+  if(error){toast('خطأ في التحديث','err');return;}
+  const im=S.pkgImages.find(x=>x.id===id); if(im) im.caption=caption;
+  toast('تم تحديث الوصف ✓','ok');
+}
+async function moveImg(id,dir){
+  const idx=S.pkgImages.findIndex(x=>x.id===id);
+  const swapIdx=idx+dir;
+  if(idx<0||swapIdx<0||swapIdx>=S.pkgImages.length) return;
+  const a=S.pkgImages[idx], b=S.pkgImages[swapIdx];
+  const[aSort,bSort]=[a.sort_order,b.sort_order];
+  await Promise.all([
+    sb.from('package_images').update({sort_order:bSort}).eq('id',a.id),
+    sb.from('package_images').update({sort_order:aSort}).eq('id',b.id),
+  ]);
+  loadPkgImages();
+}
+async function deletePkgImage(id){
+  if(!confirm('هل تريد حذف هذه الصورة نهائياً؟')) return;
+  const im=S.pkgImages.find(x=>x.id===id);
+  const{error}=await sb.from('package_images').delete().eq('id',id);
+  if(error){toast('خطأ في الحذف','err');return;}
+  if(im?.image_path) await sb.storage.from('package-images').remove([im.image_path]);
+  toast('تم الحذف','ok');
+  loadPkgImages();
 }
 
 // ── FAQ STOREFRONT (من Supabase) ─────────
