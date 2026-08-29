@@ -125,6 +125,8 @@ button,input,select,textarea{font-family:var(--f)}
 .pbadge{position:absolute;top:14px;right:14px;padding:4px 12px;border-radius:12px;font-size:11px;font-weight:900;z-index:1}
 .pb-gold{background:var(--au);color:var(--tx)}
 .pb-green{background:var(--g);color:#fff}
+.pshare{position:absolute;top:14px;left:14px;width:34px;height:34px;background:rgba(255,255,255,.94);border:none;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;z-index:2;box-shadow:0 2px 10px rgba(0,0,0,.18);transition:transform .15s,background .15s}
+.pshare:hover{transform:scale(1.1);background:#fff}
 .phead{padding:24px 20px 18px}
 .phead-dk{background:linear-gradient(135deg,var(--g),var(--gd))}
 .pcode{font-size:10px;font-weight:700;margin-bottom:4px}
@@ -591,6 +593,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
   <div class="modal" style="max-width:580px" onclick="event.stopPropagation()">
     <div style="background:linear-gradient(135deg,var(--g),var(--gd));padding:26px 24px 20px;border-radius:20px 20px 0 0;position:relative">
       <button class="mclose" onclick="closePkgModal()" style="position:absolute;top:12px;left:12px;color:#fff;background:rgba(255,255,255,.15);border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center">×</button>
+      <button onclick="shareProgram(S.selPkg?.id,event)" title="نسخ رابط البرنامج" aria-label="نسخ رابط البرنامج" style="position:absolute;top:12px;left:52px;color:#fff;background:rgba(255,255,255,.15);border:none;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px">🔗</button>
       <div style="font-size:10px;font-weight:700;margin-bottom:4px;color:rgba(255,255,255,.6)" id="pm-code"></div>
       <div style="font-size:19px;font-weight:900;color:#fff;line-height:1.3" id="pm-name"></div>
       <div style="font-size:12px;color:rgba(255,255,255,.65);margin-top:3px" id="pm-sub"></div>
@@ -1588,6 +1591,7 @@ function pkgCard(p){
   const badge=p.category==='kidana'?'الأفخم':p.is_featured?'الأفضل':null;
   return `
   <div class="pkg-card${p.is_featured?' feat':''}" onclick="openPkgModal('${p.id}')">
+    <button class="pshare" onclick="shareProgram('${p.id}',event)" title="نسخ رابط البرنامج" aria-label="نسخ رابط البرنامج">🔗</button>
     ${badge?`<div class="pbadge ${p.category==='kidana'?'pb-gold':'pb-green'}">${badge}</div>`:''}
     ${cover?`<div class="pcover"><img src="${esc(cover)}" alt="${esc(p.name)}" loading="lazy"></div>`:''}
     <div class="phead${dark?' phead-dk':''}">
@@ -2082,9 +2086,41 @@ function toggleFaq(el){
 // ── DEEP LINK ────────────────────────────
 function checkDeepLink(){
   const id=new URLSearchParams(window.location.search).get('package');
-  if(id&&S.pkgs.length){const p=S.pkgs.find(x=>x.id===id);if(p)openPkgModal(p.id);}
+  if(id&&S.pkgs.length){
+    const p=S.pkgs.find(x=>x.id===id);
+    if(p){
+      if(p.trip_type&&p.trip_type!==S.tripType){
+        const btn=document.querySelector(`.ttbtn[data-t="${p.trip_type}"]`);
+        switchTripType(p.trip_type,btn);
+      }
+      openPkgModal(p.id);
+    }
+  }
 }
 window.addEventListener('popstate',e=>{if(!e.state?.pkg)closePkgModal();});
+
+// ── مشاركة رابط البرنامج (نسخ اللينك) ──
+function shareProgram(id,e){
+  if(e) e.stopPropagation();
+  if(!id){toast('تعذر إنشاء الرابط','err');return;}
+  const url=`${window.location.origin}${window.location.pathname}?package=${id}`;
+  const done=()=>toast('تم نسخ رابط البرنامج ✓ الصقه في أي مكان لإرساله','ok');
+  const fail=()=>{
+    // نسخ احتياطي للمتصفحات القديمة أو الصفحات غير https
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); document.body.removeChild(ta);
+      done();
+    }catch(_){toast('تعذر نسخ الرابط، انسخه يدويًا: '+url,'err');}
+  };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(url).then(done).catch(fail);
+  }else{
+    fail();
+  }
+}
 
 // ── INIT ─────────────────────────────────
 async function init(){
