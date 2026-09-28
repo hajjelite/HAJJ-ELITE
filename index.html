@@ -76,7 +76,7 @@ button,input,select,textarea{font-family:var(--f)}
 .hero-c{max-width:820px;margin:0 auto;text-align:center;position:relative}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,175,55,.2);border:1px solid rgba(212,175,55,.4);border-radius:24px;padding:7px 20px;margin-bottom:24px;font-size:13px;color:var(--au);font-weight:700}
 .hero h1{font-size:clamp(26px,5vw,48px);color:#fff;line-height:1.25;margin-bottom:18px;font-weight:900}
-.hero h1 span{color:var(--au)}
+.hero h1 #hero-t2{color:var(--au)}
 .hero-sub{color:rgba(255,255,255,.8);font-size:16px;line-height:1.85;margin:0 auto 36px;max-width:620px}
 .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:50px}
 .btn-hero-ol{background:rgba(255,255,255,.12);color:#fff;border:2px solid rgba(255,255,255,.35);padding:14px 32px;border-radius:28px;font-size:15px;font-weight:700;cursor:pointer;transition:all .2s}
@@ -450,14 +450,14 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 <!-- Hero -->
 <section class="hero">
   <div class="hero-c">
-    <div class="hero-badge">🕌 برامج الحج ١٤٤٧ هـ / ٢٠٢٦ م — دار السفر تورز</div>
-    <h1>قارن أفضل برامج الحج الفاخرة<br><span>لموسم ١٤٤٧ هـ في مصر</span></h1>
-    <p class="hero-sub">برامج متنوعة من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه — حج مباشر بدون قرعة<br>سفر من صالة كبار الزوار · قطار الحرمين السريع · إشراف ديني متميز</p>
+    <div class="hero-badge" id="hero-badge">🕌 برامج الحج ١٤٤٧ هـ / ٢٠٢٦ م — دار السفر تورز</div>
+    <h1><span id="hero-t1">قارن أفضل برامج الحج الفاخرة</span><br><span id="hero-t2">لموسم ١٤٤٧ هـ في مصر</span></h1>
+    <p class="hero-sub" id="hero-sub">برامج متنوعة من ٢٤٥,٠٠٠ إلى ٦٤٥,٠٠٠ جنيه — حج مباشر بدون قرعة<br>سفر من صالة كبار الزوار · قطار الحرمين السريع · إشراف ديني متميز</p>
     <div class="hero-btns">
       <button class="btn btn-gold" style="padding:15px 34px;font-size:15px;border-radius:30px" onclick="sid('lead-sec')">احجز استشارة مجانية ←</button>
       <button class="btn-hero-ol" onclick="sid('pkg-sec')">عرض جميع البرامج</button>
     </div>
-    <div class="hero-stats">
+    <div class="hero-stats" id="hero-stats">
       <div class="hst"><div class="n">١٠+</div><div class="l">برنامج متاح</div></div>
       <div class="hst"><div class="n">٢٤٥ - ٦٤٥ ألف</div><div class="l">نطاق الأسعار (جنيه)</div></div>
       <div class="hst"><div class="n">بدون قرعة</div><div class="l">حج مباشر</div></div>
@@ -564,12 +564,12 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
 <!-- Footer -->
 <footer>
   <div class="ft-grid">
-    <div><div class="flogo">HAJJ ELITE</div><div class="flogo-s">الحج إيليت — دليلك الموثوق لحج الرفاهية</div><div class="ftxt">منصة متخصصة في برامج الحج الفاخرة من دار السفر تورز لموسم ١٤٤٧ هـ / ٢٠٢٦ م.</div></div>
+    <div><div class="flogo" id="footer-company">HAJJ ELITE</div><div class="flogo-s" id="footer-tagline">الحج إيليت — دليلك الموثوق لحج الرفاهية</div><div class="ftxt" id="footer-desc">منصة متخصصة في برامج الحج الفاخرة من دار السفر تورز لموسم ١٤٤٧ هـ / ٢٠٢٦ م.</div></div>
     <div><div class="ftit">البرامج</div><a class="flink" onclick="switchTripType('hajj');filterPkgs('kidana');sid('pkg-sec')">أبراج كدانة الوادي</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('vip');sid('pkg-sec')">فاخر VIP</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('classic');sid('pkg-sec')">كلاسيك ١٤ يوم</a><a class="flink" onclick="switchTripType('hajj');filterPkgs('economy');sid('pkg-sec')">تحسين</a></div>
     <div><div class="ftit">تواصل معنا</div><div class="ftxt" id="f-contact">📧 info@hajjelite.com<br>💬 واتساب: قريباً<br>📍 القاهرة، مصر</div></div>
-    <div><div class="ftit">الضمانات</div><div class="ftxt">✅ وفق ضوابط وزارة السياحة المصرية<br>✅ حج مباشر بدون قرعة<br>✅ لا يشترط محرم فوق ٢٥ سنة<br>✅ الطيران غير مشمول بالسعر</div></div>
+    <div><div class="ftit">الضمانات</div><div class="ftxt" id="footer-guarantees">✅ وفق ضوابط وزارة السياحة المصرية<br>✅ حج مباشر بدون قرعة<br>✅ لا يشترط محرم فوق ٢٥ سنة<br>✅ الطيران غير مشمول بالسعر</div></div>
   </div>
-  <div class="ft-bot"><div class="fcopy">© ٢٠٢٦ HAJJ ELITE. جميع الحقوق محفوظة.</div><div class="fcopy">سياسة الخصوصية · الشروط والأحكام</div></div>
+  <div class="ft-bot"><div class="fcopy" id="footer-copyright">© ٢٠٢٦ HAJJ ELITE. جميع الحقوق محفوظة.</div><div class="fcopy">سياسة الخصوصية · الشروط والأحكام</div></div>
 </footer>
 </div><!-- /storefront -->
 
@@ -790,12 +790,35 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
       <div class="adt-hdr"><h2>🔧 إعدادات الموقع</h2></div>
       <div class="set-grid">
         <div class="set-card">
-          <h3>⚙️ الإعدادات العامة</h3>
-          <div class="fg"><label class="flbl">شريط الإعلان</label><input class="fi" id="s-ann"></div>
-          <div class="fg"><label class="flbl">نص الماركي</label><input class="fi" id="s-mq"></div>
+          <h3>⚙️ إعدادات عامة</h3>
+          <div class="fg"><label class="flbl">نص الشريط المتحرك (الماركي)</label><input class="fi" id="s-mq"></div>
           <div class="fg"><label class="flbl">رقم الواتساب</label><input class="fi fi-ltr" id="s-wa"></div>
           <div class="fg"><label class="flbl">البريد الإلكتروني</label><input class="fi fi-ltr" id="s-em"></div>
-          <button class="btn btn-primary" style="width:100%;padding:12px" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+        </div>
+        <div class="set-card">
+          <h3>🏠 الصفحة الرئيسية (Hero)</h3>
+          <div class="fg"><label class="flbl">الشارة العلوية</label><input class="fi" id="s-hero-badge"></div>
+          <div class="fg"><label class="flbl">العنوان — السطر الأول (أبيض)</label><input class="fi" id="s-hero-t1"></div>
+          <div class="fg"><label class="flbl">العنوان — السطر الثاني (ذهبي)</label><input class="fi" id="s-hero-t2"></div>
+          <div class="fg"><label class="flbl">الوصف تحت العنوان</label><textarea class="fi" id="s-hero-sub" rows="2"></textarea></div>
+          <div class="flbl" style="margin:12px 0 6px">أرقام الإحصائيات (٤ مربعات تحت الأزرار)</div>
+          <div class="frow" style="margin-bottom:8px"><input class="fi" id="s-hs1-n" placeholder="الرقم — مثال: ١٠+"><input class="fi" id="s-hs1-l" placeholder="الوصف — مثال: برنامج متاح"></div>
+          <div class="frow" style="margin-bottom:8px"><input class="fi" id="s-hs2-n" placeholder="الرقم"><input class="fi" id="s-hs2-l" placeholder="الوصف"></div>
+          <div class="frow" style="margin-bottom:8px"><input class="fi" id="s-hs3-n" placeholder="الرقم"><input class="fi" id="s-hs3-l" placeholder="الوصف"></div>
+          <div class="frow"><input class="fi" id="s-hs4-n" placeholder="الرقم"><input class="fi" id="s-hs4-l" placeholder="الوصف"></div>
+        </div>
+        <div class="set-card">
+          <h3>🦶 التذييل (Footer)</h3>
+          <div class="fg"><label class="flbl">اسم الشركة</label><input class="fi" id="s-company"></div>
+          <div class="fg"><label class="flbl">الشعار (Tagline)</label><input class="fi" id="s-tagline"></div>
+          <div class="fg"><label class="flbl">وصف مختصر</label><textarea class="fi" id="s-footer-desc" rows="2"></textarea></div>
+          <div class="fg"><label class="flbl">الموقع الجغرافي</label><input class="fi" id="s-footer-loc"></div>
+          <div class="flbl" style="margin:12px 0 6px">قائمة "الضمانات" (٤ بنود)</div>
+          <div class="fg"><input class="fi" id="s-fg1" placeholder="بند ١"></div>
+          <div class="fg"><input class="fi" id="s-fg2" placeholder="بند ٢"></div>
+          <div class="fg"><input class="fi" id="s-fg3" placeholder="بند ٣"></div>
+          <div class="fg"><input class="fi" id="s-fg4" placeholder="بند ٤"></div>
+          <div class="fg"><label class="flbl">نص حقوق النشر</label><input class="fi" id="s-copyright"></div>
         </div>
         <div class="set-card">
           <h3>🔑 تغيير كلمة المرور</h3>
@@ -804,6 +827,7 @@ footer{background:var(--tx);color:#fff;padding:48px 20px 24px}
           <button class="btn btn-outline" style="width:100%;padding:12px" onclick="changePass()">🔑 تغيير كلمة المرور</button>
         </div>
       </div>
+      <button class="btn btn-primary" style="width:100%;padding:14px;margin-top:16px;font-size:15px" onclick="saveSettings()">💾 حفظ كل الإعدادات</button>
     </div>
 
   </div>
@@ -1472,14 +1496,38 @@ async function delTest(id){
 async function loadSettingsForm(){
   if(!sb) return;
   try{
-    const{data}=await sb.from('settings').select('*').eq('id',1).maybeSingle();
-    if(!data) return;
-    g$('s-ann').value=data.announcement_bar||''; g$('s-mq').value=data.marquee_text||'';
-    g$('s-wa').value=data.whatsapp_number||''; g$('s-em').value=data.email||'';
+    const{data:s}=await sb.from('settings').select('*').eq('id',1).maybeSingle();
+    if(!s) return;
+    g$('s-mq').value=s.marquee_text||'';
+    g$('s-wa').value=s.whatsapp_number||'';
+    g$('s-em').value=s.email||'';
+    g$('s-hero-badge').value=s.hero_badge||'';
+    g$('s-hero-t1').value=s.hero_title_line1||'';
+    g$('s-hero-t2').value=s.hero_title_line2||'';
+    g$('s-hero-sub').value=s.hero_sub||'';
+    const hs=Array.isArray(s.hero_stats)?s.hero_stats:[];
+    for(let i=0;i<4;i++){ g$(`s-hs${i+1}-n`).value=hs[i]?.n||''; g$(`s-hs${i+1}-l`).value=hs[i]?.l||''; }
+    g$('s-company').value=s.company_name||'';
+    g$('s-tagline').value=s.tagline||'';
+    g$('s-footer-desc').value=s.footer_description||'';
+    g$('s-footer-loc').value=s.footer_location||'';
+    const fg=Array.isArray(s.footer_guarantees)?s.footer_guarantees:[];
+    for(let i=0;i<4;i++){ g$(`s-fg${i+1}`).value=fg[i]||''; }
+    g$('s-copyright').value=s.footer_copyright||'';
   }catch(e){console.error(e);}
 }
 async function saveSettings(){
-  const d={announcement_bar:g$('s-ann').value,marquee_text:g$('s-mq').value,whatsapp_number:g$('s-wa').value,email:g$('s-em').value,updated_at:new Date().toISOString()};
+  const hero_stats=[1,2,3,4].map(i=>({n:g$(`s-hs${i}-n`).value.trim(),l:g$(`s-hs${i}-l`).value.trim()})).filter(x=>x.n||x.l);
+  const footer_guarantees=[1,2,3,4].map(i=>g$(`s-fg${i}`).value.trim()).filter(Boolean);
+  const d={
+    marquee_text:g$('s-mq').value.trim(), whatsapp_number:g$('s-wa').value.trim(), email:g$('s-em').value.trim(),
+    hero_badge:g$('s-hero-badge').value.trim(), hero_title_line1:g$('s-hero-t1').value.trim(), hero_title_line2:g$('s-hero-t2').value.trim(),
+    hero_sub:g$('s-hero-sub').value.trim(), hero_stats,
+    company_name:g$('s-company').value.trim(), tagline:g$('s-tagline').value.trim(),
+    footer_description:g$('s-footer-desc').value.trim(), footer_location:g$('s-footer-loc').value.trim(),
+    footer_guarantees, footer_copyright:g$('s-copyright').value.trim(),
+    updated_at:new Date().toISOString(),
+  };
   const{error}=await sb.from('settings').update(d).eq('id',1);
   if(error){toast('خطأ: '+error.message,'err');return;}
   S.settings={...S.settings,...d}; applySettings(d); toast('تم حفظ الإعدادات ✓','ok');
@@ -1503,9 +1551,25 @@ async function loadSettings(){
   }catch(_){}
 }
 function applySettings(s){
+  if(s.hero_badge){const el=g$('hero-badge');if(el)el.textContent=s.hero_badge;}
+  if(s.hero_title_line1){const el=g$('hero-t1');if(el)el.textContent=s.hero_title_line1;}
+  if(s.hero_title_line2){const el=g$('hero-t2');if(el)el.textContent=s.hero_title_line2;}
+  if(s.hero_sub){const el=g$('hero-sub');if(el)el.innerHTML=esc(s.hero_sub).replace(/\n/g,'<br>');}
+  if(Array.isArray(s.hero_stats)&&s.hero_stats.length){
+    const el=g$('hero-stats');
+    if(el) el.innerHTML=s.hero_stats.map(st=>`<div class="hst"><div class="n">${esc(st.n||'')}</div><div class="l">${esc(st.l||'')}</div></div>`).join('');
+  }
   if(s.marquee_text){const t=g$('mq-track');if(t)t.innerHTML=`<span>${esc(s.marquee_text)}</span><span aria-hidden="true">${esc(s.marquee_text)}</span>`;}
   if(s.whatsapp_number){const w=g$('wa-fab');if(w)w.href=`https://wa.me/${s.whatsapp_number}`;}
-  if(s.email||s.whatsapp_number){const c=g$('f-contact');if(c)c.innerHTML=`📧 ${esc(s.email||'info@hajjelite.com')}<br>💬 واتساب: ${esc(s.whatsapp_number||'قريباً')}<br>📍 القاهرة، مصر`;}
+  if(s.company_name){const el=g$('footer-company');if(el)el.textContent=s.company_name;}
+  if(s.tagline){const el=g$('footer-tagline');if(el)el.textContent=s.tagline;}
+  if(s.footer_description){const el=g$('footer-desc');if(el)el.textContent=s.footer_description;}
+  if(s.email||s.whatsapp_number||s.footer_location){const c=g$('f-contact');if(c)c.innerHTML=`📧 ${esc(s.email||'info@hajjelite.com')}<br>💬 واتساب: ${esc(s.whatsapp_number||'قريباً')}<br>📍 ${esc(s.footer_location||'القاهرة، مصر')}`;}
+  if(Array.isArray(s.footer_guarantees)&&s.footer_guarantees.length){
+    const el=g$('footer-guarantees');
+    if(el) el.innerHTML=s.footer_guarantees.map(x=>`✅ ${esc(x)}`).join('<br>');
+  }
+  if(s.footer_copyright){const el=g$('footer-copyright');if(el)el.textContent=s.footer_copyright;}
 }
 
 // ── REALTIME ─────────────────────────────
